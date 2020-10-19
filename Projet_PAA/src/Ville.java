@@ -1,17 +1,16 @@
-
 public class Ville {
 	//Attributs
 	private String nom;
-	private int ecole;
+	private boolean ecole;
 	
 	//Constructeurs
-	public Ville(String nom, int ecole) {
+	public Ville(String nom, boolean ecole) {
 		this.nom=nom;
 		this.ecole=ecole;
 	}
-	public Ville(String nom) {
-		this.nom=nom;
-		ecole=0;
+	public Ville(String ecole2) {
+		this.nom=ecole2;
+		ecole=false;
 	}
 	
 	//Setters
@@ -19,7 +18,7 @@ public class Ville {
 		this.nom=nom;
 	}
 	
-	public void setEcole (int ecole) {
+	public void setEcole (boolean ecole) {
 		this.ecole=ecole;
 	}
 	
@@ -29,17 +28,17 @@ public class Ville {
 		return nom;
 	}
 	
-	public int getEcole() {
+	public boolean getEcole() {
 		return ecole;
 	}
 	
 	//Methodes
 	
 	public void ajoutEcole() {
-		setEcole(1);
+		setEcole(true);
 	}
 	
 	public void retireEcole() {
-		setEcole(0);
+		setEcole(false);
 	}
 }
