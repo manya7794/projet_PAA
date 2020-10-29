@@ -29,7 +29,7 @@ public class Utilitaire {
 	 * si cette ville existant le tableau de nom de ville, 
 	 * s'il n'existe pas nous pouvons pas relier ses deux villes
 	 */
-		public static void menuRoute(Ville[]tab_ville) {
+public static void menuRoute(Ville[]tab_ville) {
 		//Creation de la liste des voisins avec le modele de liste d'adjacence
 		ArrayList <ArrayList <Character>> tab_voisin = new ArrayList <ArrayList <Character>>(tab_ville.length);
 		//Ajoute le nombre de "ligne" correspondant au nb de ville
@@ -40,12 +40,12 @@ public class Utilitaire {
 		
 		boolean b = true;
 		do {
-			int option = choixMenuRoute();
+			char option = choixMenuRoute();
 			switch(option) {
-			case 1 : 
+			case '1' : 
 				createRoute(tab_ville, tab_voisin);
 				break;
-			case 2 : 
+			case '2' : 
 				b = false;
 				break;
 			default : 
@@ -55,14 +55,14 @@ public class Utilitaire {
 		}while(b);
 	}
 	
-	private static int choixMenuRoute() {
-		int option = 0;
+	private static char choixMenuRoute() {
+		char option;
 		do {
 			System.out.println("Menu route :");
 			System.out.println("1) Ajouter une route");
 			System.out.println("2) Fin");
-			option = scan.nextInt();
-		} while ((option < 1) || (option > 2));
+			option = scan.next().charAt(0);
+		} while ((option==1) || (option==2));
 		return option;
 	}
 	
