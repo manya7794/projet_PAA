@@ -2,98 +2,115 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Utilitaire {
-	
+	static Scanner scan = new Scanner(System.in);
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en dÈfinissant le nombre total de ville 
-	 * grace a la fonction precedente "nombreVille()"
+	 * Cette m√©thode cr√©er un tableau de nom  ville a toutes les villes en d√©finissant le nombre total de ville 
+	 * gr√¢ce √† la fonction pr√©c√©dente "nombreVille()"
 	 * 
-	 * @param String [] tab_ville, il faut stocker les noms des villes dans un tableau de String
-	 * car les noms de ville peuvent etre en lettre alphabetique ou des chaines de caractere
+	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
+	 * car les noms de ville peuvent √™tre en lettre alphab√©tique ou des chaines de carac√®re
 	 */
-	public static void nomVille(Ville[]tab_ville) {
+	public static void nomVille(Ville []tab_ville) {
 		char ascii = 65;
 		for(int i = 0; i<tab_ville.length; i++) {
-			//Conversion char en code ASCII
 			char nom = (char) ascii;
 			tab_ville[i]= new Ville(nom);
+			//affichage temporaire le nom de ville (√† retirer plus tard)
 			System.out.println("Ville "+tab_ville[i].getNom());
 			ascii++;
 		}
+
 	}
 	/*
-	 * Cette methode doit afficher un menu pour les routes
+	 * Cette m√©thode doit afficher un menu pour les routes
 	 * relier deux ville par une route l'option 1 et quitter l'option 2
 	 * 
-	 * @param ville[] tab_ville, est un tableau de la classe, lorsque nous saisissons deux ville, nous devons rechercher dans le tableau de ville
-	 * si cette ville est existante sinon il nous sera demander de resaisir deux nom de ville
-	 * Si les deux villes sont tout les deux existante dans le tableau de ville, cette methode doit crÈer une route entre ses deux villes
+	 * @param Ville[] tab_ville, lorsque nous saisissons deux noms de ville nous devons v√©rifier 
+	 * si cette ville existant le tableau de nom de ville, 
+	 * s'il n'existe pas nous pouvons pas relier ses deux villes
 	 */
-	@SuppressWarnings("unlikely-arg-type")
-	public static void menuRoute(Ville[]tab_ville) {
-		boolean b = true;
-		System.out.println("Menu route :");
-		System.out.println("1) Ajouter une route");
-		System.out.println("2) Fin");
-		Scanner scan = new Scanner(System.in);
-		int option = scan.nextInt();
+	public static void menuRoute(Ville[] tab_ville) {
+		boolean b = true; 	
+
 		do {
+			System.out.println("Menu route :");
+			System.out.println("1) Ajouter une route");
+			System.out.println("2) Fin");
+			int option = scan.nextInt();
+			/*
+			 * Fonctionnement apres avoir fait le choix du menu*/
 			switch(option) {
 			case 1 : 
+				/*
+				 * Saisir deux nom de ville ou nous voulions ajouter une route 
+				 * */
 				System.out.println("Saisissez une ville");
 				char ville_1 = scan.next().charAt(0);
 				System.out.println("Saisissez une autre ville");
-				char ville_2 = scan.next().charAt(0);				
-				//Creer un classe ensemble de ville
-				if(!Arrays.asList(tab_ville).contains(ville_1) || !Arrays.asList(tab_ville).contains(ville_2)) {
-					System.err.println("L'une des deux villes est inexistante");
-					//Corriger le if qui ne trouve pas les noms des villes
+				char ville_2 = scan.next().charAt(0);
+				/*
+				 * Rechercher un nom de ville dans le un tableau de ville
+				 * s'il le trouve il retourne vrai sinon false
+				 * */
+				boolean bool_1 = false;
+				boolean bool_2 = false;
+				for(int i = 0; i<tab_ville.length && (!bool_1); i++) {
+					if(tab_ville[i].getNom()==ville_1) {
+						bool_1=true;
+					}
+				}
+				for(int i = 0; i<tab_ville.length && (!bool_2); i++) {
+					if(tab_ville[i].getNom()==ville_2) {
+						bool_2=true;
+					}
+				}
+
+				if(!bool_1 && !bool_2) {
+					System.err.println("L'un des deux villes est inexistante");
 				}
 				else {
-					//Methode qui permet de crÈer une ville dans la classe communautÈ qui permet de regrouper tout objets de la ville
-					System.err.println("Les deux villes sont bien dans le tableau.");
+					System.out.println("Les deux villes sont existante dans le tableau ");
 				}
 				break;
 			case 2 : 
 				b = false;
 				break;
-			default : System.out.println("Commande invalide, choissisez une option");
+			default : System.err.println("Commande invalide, choissisez une option");
 				break;
 			}
 		}while(b);
-		scan.close();
 	}
 	
-	/*
-	 * Cette methode doit afficher le menu sur les ecoles, nous devons saisir entre 1, 2 et 3 qui sont trois option differente:
-	 * l'option 1 permet de ajouter une ecole a une ville, elle devra changer la variable boolean ecole en true pour savoir 
-	 * qu'il y a une ecole dans cette ville et nous ne pouvons pas continuer a recreer un ecole par dessu
-	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
-	 * l'option 3 met fin a cette application
-	 * 
-	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville o˘ nous pouvons connaitre le nom de la ville et
-	 * savoir si une ecole est construite dedans
-	 */
-	@SuppressWarnings("unlikely-arg-type")
-	public static void menuEcole(Ville[]tab_ville) {
+	public static void menuEcole(Ville[] tab_ville) {
 		boolean b = true;
-		System.out.println("Menu d'Ècole :");
-		System.out.println("1) Ajouter une Ècole");
-		System.out.println("2) Retirer une Ècole");
-		System.out.println("3) Fin");
-		Scanner scan = new Scanner(System.in);
-		int option = scan.nextInt();
-		//ProblËme de scanner
 		do {
+			System.out.println("Menu d'√©cole :");
+			System.out.println("1) Ajouter une √©cole");
+			System.out.println("2) Retirer une √©cole");
+			System.out.println("3) Fin");
+
+			int option = scan.nextInt();
+
 			switch(option) {
-			case 1 : 
-				System.out.println("Saisissez la ville o˘ vous voulez creer l'ecole");
-				char ecole_1 = scan.next().charAt(0);
-				Ville ville_ecole_1 = new Ville(ecole_1) ;
-				if(!Arrays.asList(tab_ville).contains(ville_ecole_1)) {
+			case 1 :
+				System.out.println("Saisissez la ville o√π vous voulez cr√©er l'√©cole");
+				char ecole_1= scan.next().charAt(0);
+				Ville ville_ecole_1 = new Ville(ecole_1);
+				/*
+				 * Rechercher un nom de ville dans le un tableau de ville
+				 * s'il le trouve il retourne vrai sinon false
+				 * */
+				boolean bool_1 = false;
+				for(int i = 0; i<tab_ville.length && (!bool_1); i++) {
+					if(tab_ville[i].getNom()==ecole_1) {
+						bool_1=true;
+					}
+				}
+				if(!bool_1) {
 					//Verifie si la ville saisie est une ville dans qui existe dans le tableau de ville
 					System.err.println("La ville n'existe pas");
 				}
-				else if(Arrays.asList(tab_ville).contains(ville_ecole_1) && ville_ecole_1.getEcole()){
+				else if (bool_1 && ville_ecole_1.getEcole()) {
 					//Verifie que l'ecole exite, et verifie s'il y a deja une ecole ou non
 					System.err.println("Cette ville a deja une ecole");
 				}
@@ -105,10 +122,20 @@ public class Utilitaire {
 				}
 				break;
 			case 2 : 
-				System.out.println("Saisissez la ville o˘ vous voulez creer l'ecole");
+				System.out.println("Saisissez la ville o√π vous voulez creer l'ecole");
 				char ecole_2 = scan.next().charAt(0);
-				Ville ville_ecole_2 = new Ville(ecole_2) ;
-				if(!Arrays.asList(tab_ville).contains(ville_ecole_2)) {
+				Ville ville_ecole_2 = new Ville(ecole_2);
+				/*
+				 * Rechercher un nom de ville dans le un tableau de ville
+				 * s'il le trouve il retourne vrai sinon false
+				 * */
+				boolean bool_2 = false;
+				for(int i = 0; i<tab_ville.length && (!bool_2); i++) {
+					if(tab_ville[i].getNom()==ecole_2) {
+						bool_2=true;
+					}
+				}
+				if(!bool_2){
 					//Verifie si la ville saisie est une ville dans qui existe dans le tableau de ville
 					System.err.println("La ville n'existe pas");
 				}
@@ -131,7 +158,6 @@ public class Utilitaire {
 			}
 		}while(b);
 		scan.close();
-		
 	}
 
 }
