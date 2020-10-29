@@ -4,18 +4,20 @@ import java.util.Scanner;
 public class Utilitaire {
 	
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en dÃ©finissant le nombre total de ville 
+	 * Cette methode creer un tableau de nom  ville a toutes les villes en définissant le nombre total de ville 
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
 	 * @param String [] tab_ville, il faut stocker les noms des villes dans un tableau de String
 	 * car les noms de ville peuvent etre en lettre alphabetique ou des chaines de caractere
 	 */
 	public static void nomVille(Ville[]tab_ville) {
-		char nom = 'A';
+		char ascii = 65;
 		for(int i = 0; i<tab_ville.length; i++) {
-			System.out.println("Nom de la ville nÂ°"+(i+1));
 			//Conversion char en code ASCII
-			tab_ville[i]= null;
+			char nom = (char) ascii;
+			tab_ville[i]= new Ville(nom);
+			System.out.println("Ville "+tab_ville[i].getNom());
+			ascii++;
 		}
 	}
 	/*
@@ -24,7 +26,7 @@ public class Utilitaire {
 	 * 
 	 * @param ville[] tab_ville, est un tableau de la classe, lorsque nous saisissons deux ville, nous devons rechercher dans le tableau de ville
 	 * si cette ville est existante sinon il nous sera demander de resaisir deux nom de ville
-	 * Si les deux villes sont tout les deux existante dans le tableau de ville, cette methode doit crÃ©er une route entre ses deux villes
+	 * Si les deux villes sont tout les deux existante dans le tableau de ville, cette methode doit créer une route entre ses deux villes
 	 */
 	@SuppressWarnings("unlikely-arg-type")
 	public static void menuRoute(Ville[]tab_ville) {
@@ -38,16 +40,17 @@ public class Utilitaire {
 			switch(option) {
 			case 1 : 
 				System.out.println("Saisissez une ville");
-				String ville_1 = scan.next();
+				char ville_1 = scan.next().charAt(0);
 				System.out.println("Saisissez une autre ville");
-				String ville_2 = scan.next();				
+				char ville_2 = scan.next().charAt(0);				
 				//Creer un classe ensemble de ville
 				if(!Arrays.asList(tab_ville).contains(ville_1) || !Arrays.asList(tab_ville).contains(ville_2)) {
 					System.err.println("L'une des deux villes est inexistante");
+					//Corriger le if qui ne trouve pas les noms des villes
 				}
 				else {
-					//Methode qui permet de crÃ©er une ville dans la classe communautÃ© qui permet de regrouper tout objets de la ville
-					System.err.println("Les deux villes sont existante dans le tableau ");
+					//Methode qui permet de créer une ville dans la classe communauté qui permet de regrouper tout objets de la ville
+					System.err.println("Les deux villes sont bien dans le tableau.");
 				}
 				break;
 			case 2 : 
@@ -67,23 +70,24 @@ public class Utilitaire {
 	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
 	 * l'option 3 met fin a cette application
 	 * 
-	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
+	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville où nous pouvons connaitre le nom de la ville et
 	 * savoir si une ecole est construite dedans
 	 */
 	@SuppressWarnings("unlikely-arg-type")
 	public static void menuEcole(Ville[]tab_ville) {
 		boolean b = true;
-		System.out.println("Menu d'Ã©cole :");
-		System.out.println("1) Ajouter une Ã©cole");
-		System.out.println("2) Retirer une Ã©cole");
+		System.out.println("Menu d'école :");
+		System.out.println("1) Ajouter une école");
+		System.out.println("2) Retirer une école");
 		System.out.println("3) Fin");
 		Scanner scan = new Scanner(System.in);
 		int option = scan.nextInt();
+		//Problème de scanner
 		do {
 			switch(option) {
 			case 1 : 
-				System.out.println("Saisissez la ville oÃ¹ vous voulez creer l'ecole");
-				String ecole_1 = scan.next();
+				System.out.println("Saisissez la ville où vous voulez creer l'ecole");
+				char ecole_1 = scan.next().charAt(0);
 				Ville ville_ecole_1 = new Ville(ecole_1) ;
 				if(!Arrays.asList(tab_ville).contains(ville_ecole_1)) {
 					//Verifie si la ville saisie est une ville dans qui existe dans le tableau de ville
@@ -101,8 +105,8 @@ public class Utilitaire {
 				}
 				break;
 			case 2 : 
-				System.out.println("Saisissez la ville oÃ¹ vous voulez creer l'ecole");
-				String ecole_2 = scan.next();
+				System.out.println("Saisissez la ville où vous voulez creer l'ecole");
+				char ecole_2 = scan.next().charAt(0);
 				Ville ville_ecole_2 = new Ville(ecole_2) ;
 				if(!Arrays.asList(tab_ville).contains(ville_ecole_2)) {
 					//Verifie si la ville saisie est une ville dans qui existe dans le tableau de ville

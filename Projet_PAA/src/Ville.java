@@ -1,20 +1,20 @@
 public class Ville {
 	//Attributs
-	private String nom;
+	private char nom;
 	private boolean ecole;
 	
 	//Constructeurs
-	public Ville(String nom, boolean ecole) {
+	public Ville(char nom, boolean ecole) {
 		this.nom=nom;
 		this.ecole=ecole;
 	}
-	public Ville(String ecole2) {
-		this.nom=ecole2;
-		ecole=false;
+	public Ville(char nom) {
+		this.nom=nom;
+		ecole=true;
 	}
 	
 	//Setters
-	public void setNom(String nom) {
+	public void setNom(char nom) {
 		this.nom=nom;
 	}
 	
@@ -24,7 +24,7 @@ public class Ville {
 	
 	//Getters
 	
-	public String getNom () {
+	public char getNom () {
 		return nom;
 	}
 	

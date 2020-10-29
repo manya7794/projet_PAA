@@ -8,7 +8,7 @@ public class Main {
 		 * Premiere etape : Saissez le nombre de ville que nous souhaitons
 		 */
 		do {
-			System.out.println("Choissisez le nombre de ville fixe ");
+			System.out.println("Choissisez le nombre de ville (<=26) ");
 			nb_ville = scan.nextInt();
 			System.out.println("Nombre de ville : "+nb_ville);
 			if(nb_ville>26) {
