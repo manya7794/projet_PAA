@@ -49,7 +49,7 @@ public static void menuRoute(Ville[]tab_ville) {
 				b = false;
 				break;
 			default : 
-				System.out.println("Commande invalide, choissisez une option");
+				System.out.println("Commande invalide, choissisez une option valide");
 				break;
 			}
 		}while(b);
@@ -152,14 +152,14 @@ public static void menuRoute(Ville[]tab_ville) {
 		char ville;
 		do {
 			System.out.println("Menu d'école :");
-			System.out.println("1) Ajouter une école");
-			System.out.println("2) Retirer une école");
+			System.out.println("1) Ajouter une ecole");
+			System.out.println("2) Retirer une ecole");
 			System.out.println("3) Fin");
 
 			int option = scan.next().charAt(0);
 			switch(option) {
 			case '1' :
-				System.out.println("Saisissez le nom de la ville ou vous voulez créer une ecole");
+				System.out.println("Saisissez le nom de la ville ou vous voulez creer une ecole");
 				ville= scan.next().charAt(0);
 				existe = false;
 				/*
@@ -195,7 +195,7 @@ public static void menuRoute(Ville[]tab_ville) {
 			case '3' : 
 				sortie = false;
 				break;
-			default : System.out.println("Commande invalide, choissisez une option");
+			default : System.out.println("Commande invalide, choissisez une option valide");
 				break;
 			}
 		}while(sortie);
