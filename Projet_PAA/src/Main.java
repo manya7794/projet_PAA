@@ -17,7 +17,7 @@ public class Main {
 			if(nb_ville<=1) {
 				System.out.println("Le nombre de ville doit etre de 2 minimum");
 			}
-		}while((nb_ville>26) || (nb_ville<1));
+		}while((nb_ville>26) || (nb_ville<=1));
 		//D¨¦finir un tableau de ville de taille "nb_ville"
 		Ville[] tab_ville = new Ville[nb_ville];
 		//D¨¦finir les noms des villes
