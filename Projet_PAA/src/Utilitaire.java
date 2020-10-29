@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Utilitaire {
@@ -58,8 +57,6 @@ public class Utilitaire {
 	
 	private static int choixMenuRoute() {
 		int option = 0;
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
 		do {
 			System.out.println("Menu route :");
 			System.out.println("1) Ajouter une route");
@@ -71,8 +68,6 @@ public class Utilitaire {
 	
 	//Methode ajoutant les listes de voisins au tab_voisin (liste d'adjacence)
 	private static void createRoute(Ville[] tab_ville, ArrayList <ArrayList<Character>> tab_voisin) {
-		@SuppressWarnings("resource")
-		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("Saisissez une ville");
 		char ville_1 = scan.next().charAt(0);
@@ -146,7 +141,6 @@ public class Utilitaire {
 	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville où nous pouvons connaitre le nom de la ville et
 	 * savoir si une ecole est construite dedans
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public static void menuEcole(Ville[]tab_ville) {
 		boolean sortie = true;
 		boolean existe;
@@ -158,7 +152,6 @@ public class Utilitaire {
 			System.out.println("3) Fin");
 
 			int option = scan.next().charAt(0);
-			Scanner scan = new Scanner(System.in);
 			switch(option) {
 			case '1' :
 				System.out.println("Saisissez le nom de la ville ou vous voulez créer une ecole");
