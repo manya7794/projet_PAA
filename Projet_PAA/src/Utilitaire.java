@@ -4,32 +4,32 @@ import java.util.Scanner;
 public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en dÃ©finissant le nombre total de ville 
+	 * Cette methode creer un tableau de nom  ville a toutes les villes en définissant le nombre total de ville 
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
 	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
-	 * car les noms de ville peuvent Ãªtre en lettre alphabÃ©tique ou des chaines de caracÃ¨re
+	 * car les noms de ville peuvent être en lettre alphabétique ou des chaines de caracère
 	 */
 	public static void nomVille(Ville []tab_ville) {
 		char ascii = 65;
 		for(int i = 0; i<tab_ville.length; i++) {
 			char nom = (char) ascii;
 			tab_ville[i]= new Ville(nom);
-			//affichage temporaire le nom de ville (Ã  retirer plus tard)
+			//affichage temporaire le nom de ville (à retirer plus tard)
 			System.out.println("Ville "+tab_ville[i].getNom());
 			ascii++;
 		}
 
 	}
 	/*
-	 * Cette mÃ©thode doit afficher un menu pour les routes
+	 * Cette méthode doit afficher un menu pour les routes
 	 * relier deux ville par une route l'option 1 et quitter l'option 2
 	 * 
-	 * @param Ville[] tab_ville, lorsque nous saisissons deux noms de ville nous devons vÃ©rifier 
+	 * @param Ville[] tab_ville, lorsque nous saisissons deux noms de ville nous devons vérifier 
 	 * si cette ville existant le tableau de nom de ville, 
 	 * s'il n'existe pas nous pouvons pas relier ses deux villes
 	 */
-public static void menuRoute(Ville[]tab_ville) {
+		public static ArrayList <ArrayList <Character>> menuRoute(Ville[]tab_ville) {
 		//Creation de la liste des voisins avec le modele de liste d'adjacence
 		ArrayList <ArrayList <Character>> tab_voisin = new ArrayList <ArrayList <Character>>(tab_ville.length);
 		//Ajoute le nombre de "ligne" correspondant au nb de ville
@@ -49,10 +49,11 @@ public static void menuRoute(Ville[]tab_ville) {
 				b = false;
 				break;
 			default : 
-				System.out.println("Commande invalide, choissisez une option valide");
+				System.out.println("Commande invalide, choissisez une option");
 				break;
 			}
 		}while(b);
+		return tab_voisin;
 	}
 	
 	private static char choixMenuRoute() {
@@ -90,13 +91,13 @@ public static void menuRoute(Ville[]tab_ville) {
 				bool_2 = true;
 			}
 		}
-		//Verifie que les deux villes sont dans tab_ville
+		
 		if(!bool_1 || !bool_2) {
 			System.err.println("L'une des deux villes est inexistante");
 		}
 		//Verifie que les deux villes sont differentes
 		else if(ville_1 == ville_2) {
-			System.out.println("La ville " + ville_1 + " ne peut etre reliÃ©e Ã  lui mÃªme");
+			System.out.println("La ville " + ville_1 + " ne peut etre reliée à lui même");
 		}
 		else {
 			
@@ -104,16 +105,11 @@ public static void menuRoute(Ville[]tab_ville) {
 			int placeVille1 = ((int) ville_1)-65;
 			int placeVille2 = ((int) ville_2)-65;
 			
-			//Verifie si les deux villes sont deja relies ou non
-			if(tab_voisin.get(placeVille1).contains(ville_2) || tab_voisin.get(placeVille2).contains(ville_1)) {
-				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont dÃ©jÃ  reliÃ©s");
-			}
-			else {
-				//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
-				tab_voisin.get(placeVille1).add(ville_2);
-				tab_voisin.get(placeVille2).add(ville_1);
-			}
-			//Affichage du tab_voisin 
+			//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
+			tab_voisin.get(placeVille1).add(ville_2);
+			tab_voisin.get(placeVille2).add(ville_1);
+			
+			//Affichage du tab_voisin (temporaire, a enlever)
 			afficherVoisin(tab_voisin);
 		}
 	}
@@ -147,23 +143,23 @@ public static void menuRoute(Ville[]tab_ville) {
 	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
 	 * l'option 3 met fin a cette application
 	 * 
-	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
+	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville où nous pouvons connaitre le nom de la ville et
 	 * savoir si une ecole est construite dedans
 	 */
-	public static void menuEcole(Ville[]tab_ville) {
+	public static void menuEcole(Ville[]tab_ville, ArrayList <ArrayList<Character>> tab_voisin) {
 		boolean sortie = true;
 		boolean existe;
 		char ville;
 		do {
-			System.out.println("Menu d'Ã©cole :");
-			System.out.println("1) Ajouter une ecole");
-			System.out.println("2) Retirer une ecole");
+			System.out.println("Menu d'école :");
+			System.out.println("1) Ajouter une école");
+			System.out.println("2) Retirer une école");
 			System.out.println("3) Fin");
 
 			int option = scan.next().charAt(0);
 			switch(option) {
 			case '1' :
-				System.out.println("Saisissez le nom de la ville ou vous voulez creer une ecole");
+				System.out.println("Saisissez le nom de la ville ou vous voulez créer une ecole");
 				ville= scan.next().charAt(0);
 				existe = false;
 				/*
@@ -180,7 +176,7 @@ public static void menuRoute(Ville[]tab_ville) {
 				//scan.close();
 				break;
 			case '2' : 
-				System.out.println("Saisissez la ville oÃ¹ vous voulez retirer une ecole");
+				System.out.println("Saisissez la ville où vous voulez retirer une ecole");
 				ville = scan.next().charAt(0);
 				existe = false;
 				/*
@@ -189,9 +185,13 @@ public static void menuRoute(Ville[]tab_ville) {
 				 * */
 				for(int i = 0; i<tab_ville.length && (!existe); i++) {
 					if(tab_ville[i].getNom()==ville) {
-						existe=true;
-						boolean ajout = false;
-						tab_ville[i].gestionEcole(existe, ajout);
+						existe=tab_ville[i].rechercheEcole(tab_ville, tab_voisin, ville);
+						if (existe) {
+							boolean ajout = false;
+							tab_ville[i].gestionEcole(existe, ajout);	
+						}
+						else
+							System.out.println("Impossible de supprimer l'ecole, il n'y aucune ecole dans les villes voisines.");
 					}
 				}
 
@@ -199,7 +199,7 @@ public static void menuRoute(Ville[]tab_ville) {
 			case '3' : 
 				sortie = false;
 				break;
-			default : System.out.println("Commande invalide, choissisez une option valide");
+			default : System.out.println("Commande invalide, choissisez une option");
 				break;
 			}
 		}while(sortie);

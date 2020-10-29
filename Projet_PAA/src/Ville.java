@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Ville {
 	//Attributs
@@ -68,5 +68,26 @@ public class Ville {
 			retireEcole();
 			System.out.println("L'ecole a ete retire de la ville de "+getNom());
 		}
+	}
+
+	public boolean rechercheEcole (Ville[] tab_ville, ArrayList <ArrayList<Character>> tab_voisin, char ville) {
+		boolean ecole = false;
+		for(int i = 0 ; i < tab_voisin.size() && !ecole ; i ++) {
+			//Accès à la ligne correspondant à la ville
+			if(tab_voisin.get(i).equals(ville)) {
+				//Accès aux villes voisines
+				for(int j = 0 ; j < tab_voisin.get(i).size() && !ecole; j++) {
+					//Récupération du nom du voisin
+					char voisin =tab_voisin.get(i).get(j);
+					for(int k =0; k<tab_ville.length; k++) {
+						//Affectation temporaire de la ville
+						if(tab_ville[k].getNom()==voisin) {
+							ecole=tab_ville[k].getEcole();
+						}
+					}
+				}	
+			}
+		}
+		return ecole;
 	}
 }
