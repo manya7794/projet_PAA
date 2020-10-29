@@ -90,9 +90,13 @@ public static void menuRoute(Ville[]tab_ville) {
 				bool_2 = true;
 			}
 		}
-		
+		//Verifie que les deux villes sont dans tab_ville
 		if(!bool_1 || !bool_2) {
 			System.err.println("L'une des deux villes est inexistante");
+		}
+		//Verifie que les deux villes sont differentes
+		else if(ville_1 == ville_2) {
+			System.out.println("La ville " + ville_1 + " ne peut etre reliée à lui même");
 		}
 		else {
 			
