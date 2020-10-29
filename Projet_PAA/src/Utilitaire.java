@@ -100,11 +100,16 @@ public static void menuRoute(Ville[]tab_ville) {
 			int placeVille1 = ((int) ville_1)-65;
 			int placeVille2 = ((int) ville_2)-65;
 			
-			//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
-			tab_voisin.get(placeVille1).add(ville_2);
-			tab_voisin.get(placeVille2).add(ville_1);
-			
-			//Affichage du tab_voisin (temporaire, a enlever)
+			//Verifie si les deux villes sont deja relies ou non
+			if(tab_voisin.get(placeVille1).contains(ville_2) || tab_voisin.get(placeVille2).contains(ville_1)) {
+				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont déjà reliés");
+			}
+			else {
+				//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
+				tab_voisin.get(placeVille1).add(ville_2);
+				tab_voisin.get(placeVille2).add(ville_1);
+			}
+			//Affichage du tab_voisin 
 			afficherVoisin(tab_voisin);
 		}
 	}
