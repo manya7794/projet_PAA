@@ -102,7 +102,7 @@ public class Utilitaire {
 		}
 		//Verifie que les deux villes sont differentes
 		else if(ville_1 == ville_2) {
-			System.out.println("La ville " + ville_1 + " ne peut etre reliée à elle-même");
+			System.out.println("La ville " + ville_1 + " ne peut etre reliee a elle-meme");
 		}
 		else {
 			
@@ -112,7 +112,7 @@ public class Utilitaire {
 	
 			//Verifie si les deux villes sont deja relies ou non
 			if(tab_voisin.get(placeVille1).contains(ville_2) || tab_voisin.get(placeVille2).contains(ville_1)) {
-				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont déjà reliés");
+				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont deja�reliees");
 			}
 			else {
 				//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
@@ -167,15 +167,15 @@ public class Utilitaire {
 		char ville;
 		do {
 			System.out.println("");
-			System.out.println("Menu d'école :");
-			System.out.println("1) Ajouter une école");
-			System.out.println("2) Retirer une école");
+			System.out.println("Menu d'ecole :");
+			System.out.println("1) Ajouter une ecole");
+			System.out.println("2) Retirer une ecole");
 			System.out.println("3) Fin");
 
 			int option = scan.next().charAt(0);
 			switch(option) {
 			case '1' :
-				System.out.println("Saisissez le nom de la ville ou vous voulez créer une ecole");
+				System.out.println("Saisissez le nom de la ville ou vous voulez creer une ecole");
 				ville= scan.next().charAt(0);
 				existe = false;
 				/*
@@ -196,7 +196,7 @@ public class Utilitaire {
 				}
 				break;
 			case '2' : 
-				System.out.println("Saisissez la ville où vous voulez retirer une ecole");
+				System.out.println("Saisissez la ville ou vous voulez retirer une ecole");
 				ville = scan.next().charAt(0);
 				existe = false;
 				/*
