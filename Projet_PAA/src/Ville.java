@@ -48,17 +48,12 @@ public class Ville {
 	
 	/*
 	 * Cette methode permet d'effectuer toutes les taches inherantes aux ecoles d'une ville
-	 * (ajout, retrait) tout en vérifiant l'existence de la ville
+	 * (ajout, retrait) tout en verifiant l'existence de la ville
 	 * @param ville - boolean signifiant l'existence ou non de la ville
 	 * @param ajout - boolean signifiant l'ajout ou le retrait d'une ecole
 	 */
-	public void gestionEcole(boolean ville, boolean ajout) {
-
-		if(!ville) {
-			//Verifie si la ville saisie est une ville dans qui existe dans le tableau de ville
-			System.err.println("La ville n'existe pas");
-		}
-		else if (ajout && getEcole()) {
+	public void gestionEcole(boolean ajout) {
+		if (ajout && getEcole()) {
 			//Si une ecole est deja presente alors qu'on veut en ajouter une
 			System.err.println("Cette ville a deja une ecole");
 		}

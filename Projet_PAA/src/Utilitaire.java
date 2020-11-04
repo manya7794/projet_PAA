@@ -19,7 +19,7 @@ public class Utilitaire {
 			System.out.println("Ville "+tab_ville[i].getNom());
 			ascii++;
 		}
-
+		System.out.println();
 	}
 	/*
 	 * Cette méthode doit afficher un menu pour les routes
@@ -166,13 +166,7 @@ public class Utilitaire {
 		boolean existe;
 		char ville;
 		do {
-			System.out.println("");
-			System.out.println("Menu d'ecole :");
-			System.out.println("1) Ajouter une ecole");
-			System.out.println("2) Retirer une ecole");
-			System.out.println("3) Fin");
-
-			int option = scan.next().charAt(0);
+			int option = choixMenuEcole();
 			switch(option) {
 			case '1' :
 				System.out.println("Saisissez le nom de la ville ou vous voulez creer une ecole");
@@ -186,15 +180,19 @@ public class Utilitaire {
 					if(tab_ville[i].getNom()==ville) {
 						existe=true;
 						boolean ajout =true;
-						tab_ville[i].gestionEcole(existe, ajout);
+						tab_ville[i].gestionEcole(ajout);
 					}
 				}
+				if(!existe)
+					System.err.println("La ville n'existe pas");
 				System.out.print("Liste des villes avec une ecole : ");
 				for(int i = 0; i<tab_ville.length; i++) {
 					if(tab_ville[i].getEcole())
 						System.out.print(tab_ville[i].getNom()+" ");
 				}
+				System.out.print("\n");
 				break;
+				
 			case '2' : 
 				System.out.println("Saisissez la ville ou vous voulez retirer une ecole");
 				ville = scan.next().charAt(0);
@@ -205,31 +203,49 @@ public class Utilitaire {
 				 */
 				for(int i = 0; i<tab_ville.length && (!existe); i++) {
 					if(tab_ville[i].getNom()==ville) {
-						//Ville trouvée
+						//Ville trouvee
 						existe=tab_ville[i].rechercheEcole(tab_ville, tab_voisin, ville);
 						
 						if (existe) {
 							boolean ajout = false;
-							tab_ville[i].gestionEcole(existe, ajout);	
+							tab_ville[i].gestionEcole(ajout);	
 						}
-						else
+						else {
 							System.out.println("Impossible de supprimer l'ecole, il n'y aucune ecole dans les villes voisines.");
+							existe=true;
+						}
 					}
 				}
+				if(!existe)
+					System.err.println("La ville n'existe pas");
 				System.out.print("Liste des villes avec une ecole : ");
 				for(int i = 0; i<tab_ville.length; i++) {
 					if(tab_ville[i].getEcole())
 						System.out.print(tab_ville[i].getNom()+" ");
 				}
+				System.out.print("\n");
 				break;
+				
 			case '3' : 
 				sortie = false;
 				break;
-			default : System.out.println("Commande invalide, choissisez une option");
+			default : System.out.println("Commande invalide, choissisez une option\n");
 				break;
 			}
 		}while(sortie);
 		scan.close();
 	}
+	private static int choixMenuEcole() {
+		int option;
+		do {
+			System.out.println("\nMenu d'ecole :");
+			System.out.println("1) Ajouter une ecole");
+			System.out.println("2) Retirer une ecole");
+			System.out.println("3) Fin");
 
+			option = scan.next().charAt(0);
+			
+		} while ((option==1) || (option==2)||(option==3));
+		return option;
+	}
 }
