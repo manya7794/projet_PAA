@@ -48,7 +48,7 @@ public class Ville {
 	
 	/*
 	 * Cette methode permet d'effectuer toutes les taches inherantes aux ecoles d'une ville
-	 * (ajout, retrait) tout en vérifiant l'existence de la ville
+	 * (ajout, retrait) tout en vÃ©rifiant l'existence de la ville
 	 * @param ville - boolean signifiant l'existence ou non de la ville
 	 * @param ajout - boolean signifiant l'ajout ou le retrait d'une ecole
 	 */
@@ -70,7 +70,7 @@ public class Ville {
 			//Methode qui ajoute une ecole dans une ville, qui change la variable boolean ecole en true
 			//Nous ne pourrons plus creer d'ecole dans cette ville 
 			ajoutEcole();
-			System.out.println("Une ecole a ete ajoute dans la ville de "+getNom());
+			System.out.println("Une ecole a ete ajoute dans la ville "+getNom());
 		}
 		else {
 			//Methode qui retire l'ecole d'une ville, qui change la variable boolean ecole en false
@@ -90,7 +90,7 @@ public class Ville {
 		boolean ecole = false;
 		boolean sortie = false;
 		for (int i=0; i<tab_ville.length && !sortie;i++) {
-			//Accès à la position de la ville
+			//AccÃ¨s Ã  la position de la ville
 			if (tab_ville[i].getNom()==ville) {
 				sortie =true;
 				//Balayage de la liste des voisins
