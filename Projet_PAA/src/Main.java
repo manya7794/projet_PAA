@@ -6,7 +6,7 @@ public class Main {
 		int nb_ville;
 		Scanner scan = new Scanner(System.in);
 		/*
-		 * Premi¨¨re ¨¦tape : Saissez le nombre de ville que nous souhaitons
+		 * Premiere etape : Saisissez le nombre de ville que nous souhaitons
 		 */
 		do {
 			System.out.println("Choissisez le nombre de ville (<=26)");
@@ -16,9 +16,9 @@ public class Main {
 				System.out.println("Le nombre de ville est sup¨¦rieur ¨¤ 26");
 			}
 		}while(nb_ville>26);
-		//D¨¦finir un tableau de ville de taille "nb_ville"
+		//Definir un tableau de ville de taille "nb_ville"
 		Ville[] tab_ville = new Ville[nb_ville];
-		//D¨¦finir les noms des villes
+		//Definir les noms des villes
 		Utilitaire.nomVille(tab_ville);
 
 		/*

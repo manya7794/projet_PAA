@@ -67,7 +67,12 @@ public class Utilitaire {
 		return option;
 	}
 	
-	//Methode ajoutant les listes de voisins au tab_voisin (liste d'adjacence)
+	/*
+	 * Ajout les listes de voisins au tab_voisin (liste d'adjacence)
+	 * 
+	 * @param tab_ville - Ville[] contenant la liste des villes creees au debut
+	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste de tous les voisins de chaque ville
+	 */
 	private static void createRoute(Ville[] tab_ville, ArrayList <ArrayList<Character>> tab_voisin) {
 		
 		System.out.println("Saisissez une ville");
@@ -97,7 +102,7 @@ public class Utilitaire {
 		}
 		//Verifie que les deux villes sont differentes
 		else if(ville_1 == ville_2) {
-			System.out.println("La ville " + ville_1 + " ne peut etre reliée à lui même");
+			System.out.println("La ville " + ville_1 + " ne peut etre reliée à elle-même");
 		}
 		else {
 			
@@ -114,7 +119,11 @@ public class Utilitaire {
 		}
 	}
 	
-	//Affichage de la liste de voisin
+	/*
+	 * Affichage de la liste des voisins de chaque ville
+	 * 
+	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste de tous les voisins de chaque ville
+	 */
 	private static void afficherVoisin(ArrayList <ArrayList<Character>> tab_voisin) {
 		//Pour recuperer le nom de la ville
 		int ascii = 65;
@@ -122,7 +131,7 @@ public class Utilitaire {
 		
 		//ArrayList <ArrayList <Character>>
 		for(int i = 0 ; i < tab_voisin.size() ; i ++) {
-			System.out.print("Voisin de la ville " +ville+" : ");
+			System.out.print("Voisins de la ville " +ville+" : ");
 			
 			//ArrayList <Character>
 			for(int j = 0 ; j < tab_voisin.get(i).size(); j++) {
@@ -151,6 +160,7 @@ public class Utilitaire {
 		boolean existe;
 		char ville;
 		do {
+			System.out.println("");
 			System.out.println("Menu d'école :");
 			System.out.println("1) Ajouter une école");
 			System.out.println("2) Retirer une école");
@@ -173,7 +183,11 @@ public class Utilitaire {
 						tab_ville[i].gestionEcole(existe, ajout);
 					}
 				}
-				//scan.close();
+				System.out.print("Liste des villes avec une ecole : ");
+				for(int i = 0; i<tab_ville.length; i++) {
+					if(tab_ville[i].getEcole())
+						System.out.print(tab_ville[i].getNom()+" ");
+				}
 				break;
 			case '2' : 
 				System.out.println("Saisissez la ville où vous voulez retirer une ecole");
@@ -182,10 +196,12 @@ public class Utilitaire {
 				/*
 				 * Recherche un nom de ville dans le tableau de villes
 				 * s'il le trouve il retourne vrai sinon false
-				 * */
+				 */
 				for(int i = 0; i<tab_ville.length && (!existe); i++) {
 					if(tab_ville[i].getNom()==ville) {
+						//Ville trouvée
 						existe=tab_ville[i].rechercheEcole(tab_ville, tab_voisin, ville);
+						
 						if (existe) {
 							boolean ajout = false;
 							tab_ville[i].gestionEcole(existe, ajout);	
@@ -194,7 +210,11 @@ public class Utilitaire {
 							System.out.println("Impossible de supprimer l'ecole, il n'y aucune ecole dans les villes voisines.");
 					}
 				}
-
+				System.out.print("Liste des villes avec une ecole : ");
+				for(int i = 0; i<tab_ville.length; i++) {
+					if(tab_ville[i].getEcole())
+						System.out.print(tab_ville[i].getNom()+" ");
+				}
 				break;
 			case '3' : 
 				sortie = false;

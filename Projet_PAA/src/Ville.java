@@ -46,6 +46,12 @@ public class Ville {
 		setEcole(false);
 	}
 	
+	/*
+	 * Cette methode permet d'effectuer toutes les taches inherantes aux ecoles d'une ville
+	 * (ajout, retrait) tout en vérifiant l'existence de la ville
+	 * @param ville - boolean signifiant l'existence ou non de la ville
+	 * @param ajout - boolean signifiant l'ajout ou le retrait d'une ecole
+	 */
 	public void gestionEcole(boolean ville, boolean ajout) {
 
 		if(!ville) {
@@ -53,8 +59,12 @@ public class Ville {
 			System.err.println("La ville n'existe pas");
 		}
 		else if (ajout && getEcole()) {
-			//Verifie que l'ecole existe, et verifie s'il y a deja une ecole ou non
+			//Si une ecole est deja presente alors qu'on veut en ajouter une
 			System.err.println("Cette ville a deja une ecole");
+		}
+		else if (!ajout && !getEcole()) {
+			//Si aucune ecole n'est presente alors qu'on veut en retirer une
+			System.err.println("Cette ville n'a aucune ecole a retirer");
 		}
 		else if (ajout&& !getEcole()) {
 			//Methode qui ajoute une ecole dans une ville, qui change la variable boolean ecole en true
@@ -69,23 +79,30 @@ public class Ville {
 			System.out.println("L'ecole a ete retire de la ville de "+getNom());
 		}
 	}
-
+	
+	/*
+	 * @param tab_ville - Ville{] contenant toutes les villes creees au debut du programme
+	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste des voisins de chaque ville
+	 * @param ville - char contenant le nom de la ville actuelle dont on recherche les voisins
+	 * @return ecole - boolean signifiant l'existence ou non d'une ecole dans les villes voisines a la ville passee en entree
+	 */
 	public boolean rechercheEcole (Ville[] tab_ville, ArrayList <ArrayList<Character>> tab_voisin, char ville) {
 		boolean ecole = false;
-		for(int i = 0 ; i < tab_voisin.size() && !ecole ; i ++) {
-			//Accès à la ligne correspondant à la ville
-			if(tab_voisin.get(i).equals(ville)) {
-				//Accès aux villes voisines
-				for(int j = 0 ; j < tab_voisin.get(i).size() && !ecole; j++) {
-					//Récupération du nom du voisin
-					char voisin =tab_voisin.get(i).get(j);
-					for(int k =0; k<tab_ville.length; k++) {
-						//Affectation temporaire de la ville
-						if(tab_ville[k].getNom()==voisin) {
-							ecole=tab_ville[k].getEcole();
+		boolean sortie = false;
+		for (int i=0; i<tab_ville.length && !sortie;i++) {
+			//Accès à la position de la ville
+			if (tab_ville[i].getNom()==ville) {
+				sortie =true;
+				//Balayage de la liste des voisins
+				for(int j=0;j<tab_voisin.get(i).size();j++) {
+					char villeTmp=tab_voisin.get(i).get(j); //Variable tampon contenant le nom du voisin actuel
+					//Balayage du tableau de villes
+					for(int k=0; k<tab_ville.length;k++) {
+						if(tab_ville[k].getNom()==(villeTmp)) {
+							ecole=tab_ville[k].getEcole();//Place la valeur du boolean Ecole
 						}
 					}
-				}	
+				}
 			}
 		}
 		return ecole;
