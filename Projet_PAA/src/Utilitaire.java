@@ -4,28 +4,27 @@ import java.util.Scanner;
 public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en définissant le nombre total de ville 
+	 * Cette methode creer un tableau de nom  ville a toutes les villes en dÃ©finissant le nombre total de ville 
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
-	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
-	 * car les noms de ville peuvent être en lettre alphabétique ou des chaines de caracère
+	 * @param Ville [] tab_ville, Sert de point de stockage des villes crees dans la methode
 	 */
 	public static void nomVille(Ville []tab_ville) {
 		char ascii = 65;
 		for(int i = 0; i<tab_ville.length; i++) {
 			char nom = (char) ascii;
 			tab_ville[i]= new Ville(nom);
-			//affichage temporaire le nom de ville (à retirer plus tard)
+			//Affichage de toutes les villes creees
 			System.out.println("Ville "+tab_ville[i].getNom());
 			ascii++;
 		}
 		System.out.println();
 	}
 	/*
-	 * Cette méthode doit afficher un menu pour les routes
+	 * Cette methode doit afficher un menu pour les routes
 	 * relier deux ville par une route l'option 1 et quitter l'option 2
 	 * 
-	 * @param Ville[] tab_ville, lorsque nous saisissons deux noms de ville nous devons vérifier 
+	 * @param Ville[] tab_ville, lorsque nous saisissons deux noms de ville nous devons verifier 
 	 * si cette ville existant le tableau de nom de ville, 
 	 * s'il n'existe pas nous pouvons pas relier ses deux villes
 	 */
@@ -55,7 +54,9 @@ public class Utilitaire {
 		}while(b);
 		return tab_voisin;
 	}
-	
+	/*
+	 *Affichage des choix lie au menu des routes
+	 */
 	private static char choixMenuRoute() {
 		char option;
 		do {
@@ -112,7 +113,7 @@ public class Utilitaire {
 	
 			//Verifie si les deux villes sont deja relies ou non
 			if(tab_voisin.get(placeVille1).contains(ville_2) || tab_voisin.get(placeVille2).contains(ville_1)) {
-				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont deja�reliees");
+				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont deja reliees");
 			}
 			else {
 				//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
@@ -152,13 +153,13 @@ public class Utilitaire {
 	}
 	
 	/*
-	 * Cette methode doit afficher le menu sur les ecoles, nous devons saisir entre 1, 2 et 3 qui sont trois option differente:
+	 * Cette methode doit afficher le menu sur les ecoles, nous devons saisir entre 1, 2 et 3 qui sont trois options differentes:
 	 * l'option 1 permet de ajouter une ecole a une ville, elle devra changer la variable boolean ecole en true pour savoir 
 	 * qu'il y a une ecole dans cette ville et nous ne pouvons pas continuer a recreer un ecole par dessu
 	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
 	 * l'option 3 met fin a cette application
 	 * 
-	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville où nous pouvons connaitre le nom de la ville et
+	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
 	 * savoir si une ecole est construite dedans
 	 */
 	public static void menuEcole(Ville[]tab_ville, ArrayList <ArrayList<Character>> tab_voisin) {
@@ -235,6 +236,9 @@ public class Utilitaire {
 		}while(sortie);
 		scan.close();
 	}
+	/*
+	 *Affichage des choix du menu lie aux ecoles
+	 */
 	private static int choixMenuEcole() {
 		int option;
 		do {
