@@ -4,8 +4,7 @@ import java.util.Scanner;
 public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en dÃ©finissant le nombre total de ville 
-	 * grace a la fonction precedente "nombreVille()"
+	 * Cette methode remplit un tableau de villes en remplissant l'entierete du tableau avec des villes 
 	 * 
 	 * @param Ville [] tab_ville, Sert de point de stockage des villes crees dans la methode
 	 */
@@ -22,7 +21,7 @@ public class Utilitaire {
 	}
 	/*
 	 * Cette methode doit afficher un menu pour les routes
-	 * relier deux ville par une route l'option 1 et quitter l'option 2
+	 * relier deux villes par une route l'option 1 et quitter l'option 2
 	 * 
 	 * @param Ville[] tab_ville, lorsque nous saisissons deux noms de ville nous devons verifier 
 	 * si cette ville existant le tableau de nom de ville, 
