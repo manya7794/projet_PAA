@@ -211,7 +211,7 @@ public class Utilitaire {
 							tab_ville[i].gestionEcole(ajout);	
 						}
 						else {
-							System.out.println("Impossible de supprimer l'ecole, il n'y aucune ecole dans les villes voisines.");
+							System.out.println("Impossible de supprimer l'ecole, il n'y aucune ecole dans une ou plusieurs villes voisines..");
 							existe=true;
 						}
 					}
