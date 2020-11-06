@@ -27,7 +27,6 @@ public class Ville {
 	}
 	
 	//Getters
-	
 	public char getNom () {
 		return nom;
 	}
@@ -37,7 +36,6 @@ public class Ville {
 	}
 	
 	//Methodes
-	
 	public void ajoutEcole() {
 		setEcole(true);
 	}
@@ -49,7 +47,6 @@ public class Ville {
 	/*
 	 * Cette methode permet d'effectuer toutes les taches inherantes aux ecoles d'une ville
 	 * (ajout, retrait) tout en verifiant l'existence de la ville
-	 * @param ville - boolean signifiant l'existence ou non de la ville
 	 * @param ajout - boolean signifiant l'ajout ou le retrait d'une ecole
 	 */
 	public void gestionEcole(boolean ajout) {
@@ -76,10 +73,12 @@ public class Ville {
 	}
 	
 	/*
+	 * Methode verifiant l'existence d'une ecole dans les villes voisines a la ville passee en entree
+	 *
 	 * @param tab_ville - Ville{] contenant toutes les villes creees au debut du programme
 	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste des voisins de chaque ville
 	 * @param ville - char contenant le nom de la ville actuelle dont on recherche les voisins
-	 * @return ecole - boolean signifiant l'existence ou non d'une ecole dans les villes voisines a la ville passee en entree
+	 * @return ecole - True si une ecole est presente dans le voisinage, false sinon
 	 */
 	public boolean rechercheEcole (Ville[] tab_ville, ArrayList <ArrayList<Character>> tab_voisin, char ville) {
 		boolean ecole = false;
