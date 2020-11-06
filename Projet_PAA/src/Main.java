@@ -6,7 +6,7 @@ public class Main {
 		int nb_ville;
 		Scanner scan = new Scanner(System.in);
 		/*
-		 * Premiere etape : Saisissez le nombre de ville que nous souhaitons
+		 * Premiere etape : Saisie du nombre de villes souhaitees
 		 */
 		do {
 			System.out.println("Choissisez le nombre de ville (<=26)");
@@ -19,19 +19,19 @@ public class Main {
 		}while(nb_ville>26);
 		System.out.println("Nombre de villes : "+nb_ville);
 		
-		//Definir un tableau de ville de taille "nb_ville"
+		//Definition d'un tableau de ville de taille "nb_ville"
 		Ville[] tab_ville = new Ville[nb_ville];
 		//Definir les noms des villes
 		Utilitaire.nomVille(tab_ville);
 
 		/*
-		 * Deuxieme etape : Afficher le menu pour les routes et pouvoir faire le choix par l'utilisateur
+		 * Deuxieme etape : Affichage du menu pour les routes et pouvoir faire le choix par l'utilisateur
 		 * 					L'utilisateur peut ajouter / relier deux ville avec un route 
 		 */
 		ArrayList <ArrayList <Character>>tab_voisin =Utilitaire.menuRoute(tab_ville);
 		
 		/*
-		 * Troisieme etape : Affcihe le menu pour les ecoles et pouvoir faire le choix par l'utilisateur
+		 * Troisieme etape : Affichage du menu pour les ecoles en attente d'un choix par l'utilisateur
 		 * 					 L'utilisateur peut ajouter une ecole dans la ville si cette ville n'a pas d'ecole
 		 * 					 L'utilisateur peut retirer une ecole d'une ville s'il ne veut plus de cette ecole
 		 */
