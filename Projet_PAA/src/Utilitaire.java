@@ -3,6 +3,48 @@ import java.util.Scanner;
 
 public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
+	
+	
+	/*
+	 * Menu principale
+	 */
+	private static int choixMenuPrincipal() {
+		int option;
+		do {
+			System.out.println("*************Menu principale*************");
+			System.out.println("1)Resoudre manuellement");
+			System.out.println("2)Resoudre automatiquement");
+			System.out.println("3)Sauvegarder");
+			System.out.println("4)Quitter");
+			System.out.println("*****************************************");
+			option = scan.nextInt();
+		}while(option>=4 && option<=1);
+		return option;
+	}
+	
+	public static void menuPrincipal() {
+		boolean sortie = true;
+		do {
+			int option = choixMenuPrincipal();
+			switch(option) {
+			case 1 : 
+				System.out.println("Resoudre manuellement");
+				break;
+			case 2 :
+				System.out.println("Resoudre automatiquement");
+				break;
+			case 3 : 
+				System.out.println("Sauvegarder");
+				break;
+			case 4 :
+				sortie = false;
+				break;
+			default :
+				System.out.println("Option invalide, choissisez une autre option");
+				break;
+			}
+		}while(sortie);
+	}
 	/*
 	 * Cette methode remplit un tableau de villes en remplissant l'entierete du tableau avec des villes 
 	 * 
