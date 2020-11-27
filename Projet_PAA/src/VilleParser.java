@@ -7,28 +7,32 @@ public class VilleParser {
 	public static Ville parser(String fichier, int nbLigne) {
 		String nom=null;
 		boolean ecole=false;
-		try(BufferedReader br=new BufferedReader(
-			new FileReader(fichier))){
-	String ligne=null;
-	for(int i=0; i<nbLigne; i++) {
-		ligne=br.readLine();
-	}
-	while((ligne=br.readLine())!=null){
-		if(ligne.startsWith("ville")){
-		if(nom!=null){
-			
-		}else{
-		nom=ligne.substring(6, (ligne.length()-2));
-		}
-		}
-			}}catch(FileNotFoundException e){
+		try(BufferedReader br=new BufferedReader(new FileReader(fichier))){
+			String ligne=null;
+			for(int i=0; i<nbLigne; i++) {
+				ligne=br.readLine();
+			}
+			while((ligne=br.readLine())!=null){
+				if(ligne.startsWith("ville")){
+					if(nom!=null){
+					
+					}
+					else{
+						nom=ligne.substring(6, (ligne.length()-2));
+						ligne=br.readLine();
+						if(!ligne.startsWith("ville")) {
+							setSortie();
+						}
+					}
+				}
+			}
+			}catch(FileNotFoundException e){
 				e.printStackTrace();
 			}catch(IOException e){
-			e.printStackTrace();
+				e.printStackTrace();
 			}
 			if(nom==null){
-			//System.err.println("Le nom n’a pas ete indique");
-			setSortie();
+				setSortie();
 			}
 		return new Ville(nom, ecole);
 	}

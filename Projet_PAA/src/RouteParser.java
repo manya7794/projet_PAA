@@ -20,7 +20,7 @@ public class RouteParser {
 						}
 						else {
 							villesaCouper =ligne.substring(6, ligne.length()-2);
-							if(!ligne.startsWith("ville")) {
+							if(!ligne.startsWith("route")) {
 								setSortie();
 							}
 						}
