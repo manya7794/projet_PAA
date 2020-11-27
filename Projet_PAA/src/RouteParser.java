@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class RouteParser {
+	private static boolean sortie = false;
 	public static String parser(String fichier, int nbLignes) {
 		String villesaCouper=null;
 		
@@ -15,7 +16,7 @@ public class RouteParser {
 				while ((ligne=br.readLine())!=null) {
 					if(ligne.startsWith("route")){
 						if(villesaCouper!=null) {
-
+						
 						}
 						else {
 							villesaCouper =ligne.substring(6, ligne.length()-2);
@@ -28,10 +29,16 @@ public class RouteParser {
 			e.printStackTrace();
 		}
 		if(villesaCouper==null) {
-			System.err.println("Aucune route n'a ete indique");
+			//System.err.println("Aucune route n'a ete indique");
+			setSortie();
 			System.exit(0);
 		}
 		return villesaCouper;
 	}
-	
+	private static void setSortie() {
+		sortie =true;
+	}
+	public boolean getSortie() {
+		return sortie;
+	}
 }
