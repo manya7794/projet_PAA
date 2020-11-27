@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 public class Main {
 	public static void main(String [] Args) {
 		int nb_ville = 0;
@@ -17,6 +20,7 @@ public class Main {
 			//Recupere le nombre de ville, donc lit chaque ligne si la lettre commence par 'v' alors incremente nb_ville
 			while((ligne = bRead.readLine()) != null) {
 				if(ligne.charAt(0) == 'v') {
+					Ville v = VilleParser.parser(Args[0],nb_ville);
 					nb_ville += 1;
 				}
 			}
@@ -29,7 +33,7 @@ public class Main {
 		//Definir un tableau de ville de taille "nb_ville"
 		Ville[] tab_ville = new Ville[nb_ville];
 		//Definir les noms des villes
-		Utilitaire.nomVille(tab_ville, Args[0]);
+		Utilitaire.nomVille(tab_ville);
 
 		/*
 		 * Deuxieme etape : Affichage du menu pour les routes et pouvoir faire le choix par l'utilisateur
