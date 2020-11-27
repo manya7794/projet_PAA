@@ -27,12 +27,12 @@ public class Utilitaire {
 	 * si cette ville existant le tableau de nom de ville, 
 	 * s'il n'existe pas nous pouvons pas relier ses deux villes
 	 */
-		public static ArrayList <ArrayList <Character>> menuRoute(Ville[]tab_ville) {
+		public static ArrayList <ArrayList <String>> menuRoute(Ville[]tab_ville) {
 		//Creation de la liste des voisins avec le modele de liste d'adjacence
-		ArrayList <ArrayList <Character>> tab_voisin = new ArrayList <ArrayList <Character>>(tab_ville.length);
+		ArrayList <ArrayList <String>> tab_voisin = new ArrayList <ArrayList <String>>(tab_ville.length);
 		//Ajoute le nombre de "ligne" correspondant au nb de ville
 		for(int i = 0 ; i < tab_ville.length ; i++) {
-			ArrayList <Character> addNbVille = new ArrayList <Character>();
+			ArrayList <String> addNbVille = new ArrayList <String>();
 			tab_voisin.add(addNbVille);
 		}
 		
@@ -56,13 +56,13 @@ public class Utilitaire {
 	/*
 	 *Affichage des choix lie au menu des routes
 	 */
-	private static char choixMenuRoute() {
-		char option;
+	private static int choixMenuRoute() {
+		int option;
 		do {
 			System.out.println("Menu route :");
 			System.out.println("1) Ajouter une route");
 			System.out.println("2) Fin");
-			option = scan.next().charAt(0);
+			option = scan.nextInt();
 		} while ((option==1) || (option==2));
 		return option;
 	}
@@ -97,6 +97,7 @@ public class Utilitaire {
 			}
 		}
 		
+		
 		if(!bool_1 || !bool_2) {
 			System.err.println("L'une des deux villes est inexistante");
 		}
@@ -105,46 +106,51 @@ public class Utilitaire {
 			System.out.println("La ville " + ville_1 + " ne peut etre reliee a elle-meme");
 		}
 		else {
-			
-			//Sert pour trouver l'emplacement de la Ville dans tab_voisin
-			int placeVille1 = ((int) ville_1)-65;
-			int placeVille2 = ((int) ville_2)-65;
-	
-			//Verifie si les deux villes sont deja relies ou non
-			if(tab_voisin.get(placeVille1).contains(ville_2) || tab_voisin.get(placeVille2).contains(ville_1)) {
-				System.err.println("La ville " + ville_1 + " et la ville " + ville_2 + " sont deja reliees");
+			/*
+			 * Gerer les cas ou la ville est deja voisine et qu'elles sont deja reliees
+			 */
+			boolean create_route = true;
+			for(int i = 0; i<tab_ville.length && create_route==true; i++) {
+				if(tab_ville[i].equals(ville_1) || tab_ville[i].equals(ville_2)) {
+					if(tab_voisin.get(i).contains(ville_2)|| tab_voisin.get(i).contains(ville_1)) {
+						System.out.println("La ville "+ville_1+" et la ville "+ville_2+" sont deja reliees");
+						create_route = false;
+					}
+				}
 			}
-			else {
-				//Ajout du ville voisin sur la ligne (placeVille) correspondant a la ville avec laquel il est voisin
-				tab_voisin.get(placeVille1).add(ville_2);
-				tab_voisin.get(placeVille2).add(ville_1);
+			/*
+			 * Lorsque nous avons verifier tout les cas, nous allons relies les deux ville et inserer dans la liste voisin qui lui correspond
+			 */
+			if(create_route) {
+				for(int i = 0; i<tab_ville.length;i++) {
+					if(tab_ville[i].equals(ville_1)) {
+						tab_voisin.get(i).add(ville_1);
+					}
+					if(tab_ville[i].equals(ville_2)) {
+						tab_voisin.get(i).add(ville_2);
+					}
+				}
 			}
-		
 			//Affichage du tab_voisin 
-			afficherVoisin(tab_voisin);
+			afficherVoisin(tab_ville, tab_voisin);
 		}
 	}
 	
-	/*
+		/*
 	 * Affichage de la liste des voisins de chaque ville
 	 * 
-	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste de tous les voisins de chaque ville
+	 * @param Ville[] tab_ville, liste de ville
+	 * @param tab_voisin - ArrayList <ArrayList<String>> contenant la liste de tous les voisins de chaque ville
 	 */
-	private static void afficherVoisin(ArrayList <ArrayList<Character>> tab_voisin) {
-		//Pour recuperer le nom de la ville
-		int ascii = 65;
-		char ville = (char) ascii;
-		
-		//ArrayList <ArrayList <Character>>
+	private static void afficherVoisin(Ville[] tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
+		//ArrayList <ArrayList <String>>
 		for(int i = 0 ; i < tab_voisin.size() ; i ++) {
-			System.out.print("Voisins de la ville " +ville+" : ");
+			System.out.print("Voisins de la ville " +tab_ville[i].getNom()+" : ");
 			
 			//ArrayList <Character>
 			for(int j = 0 ; j < tab_voisin.get(i).size(); j++) {
 				System.out.print(tab_voisin.get(i).get(j) + " ");
 			}
-			ascii++;
-			ville=(char)ascii;
 			//Saut entre chaque ligne (chaque ville)
 			System.out.println();
 		}
@@ -161,14 +167,14 @@ public class Utilitaire {
 	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
 	 * savoir si une ecole est construite dedans
 	 */
-	public static void menuEcole(Ville[]tab_ville, ArrayList <ArrayList<Character>> tab_voisin) {
+	public static void menuEcole(Ville[]tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
 		boolean sortie = true;
 		boolean existe;
-		char ville;
+		String ville;
 		do {
 			int option = choixMenuEcole();
 			switch(option) {
-			case '1' :
+			case 1 :
 				System.out.println("Saisissez le nom de la ville ou vous voulez creer une ecole");
 				ville= scan.next().charAt(0);
 				existe = false;
@@ -193,7 +199,7 @@ public class Utilitaire {
 				System.out.print("\n");
 				break;
 				
-			case '2' : 
+			case 2 : 
 				System.out.println("Saisissez la ville ou vous voulez retirer une ecole");
 				ville = scan.next().charAt(0);
 				existe = false;
@@ -226,7 +232,7 @@ public class Utilitaire {
 				System.out.print("\n");
 				break;
 				
-			case '3' : 
+			case 3 : 
 				sortie = false;
 				break;
 			default : System.out.println("Commande invalide, choissisez une option\n");
@@ -246,7 +252,7 @@ public class Utilitaire {
 			System.out.println("2) Retirer une ecole");
 			System.out.println("3) Fin");
 
-			option = scan.next().charAt(0);
+			option = scan.nextInt();
 			
 		} while ((option==1) || (option==2)||(option==3));
 		return option;
