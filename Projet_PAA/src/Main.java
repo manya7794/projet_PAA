@@ -3,26 +3,33 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String [] Args) {
-		int nb_ville;
+		int nb_ville = 0;
 		Scanner scan = new Scanner(System.in);
 		/*
-		 * Premiere etape : Saisie du nombre de villes souhaitees
+		 * Premiere etape : Lire le nombre de ville, dans le fichier
 		 */
-		do {
-			System.out.println("Choissisez le nombre de ville (<=26)");
-			nb_ville = scan.nextInt();
-			if(nb_ville>26) {
-				System.out.println("Le nombre de ville est superieur a 26");
+		System.out.println("Args[0] : "+Args[0]);
+		try {
+			FileReader fRead = new FileReader(Args[0]);
+			BufferedReader bRead = new BufferedReader(fRead);
+			String ligne = null;
+			
+			//Recupere le nombre de ville, donc lit chaque ligne si la lettre commence par 'v' alors incremente nb_ville
+			while((ligne = bRead.readLine()) != null) {
+				if(ligne.charAt(0) == 'v') {
+					nb_ville += 1;
+				}
 			}
-			else if(nb_ville<0)
-				System.err.println("Saisissez un nombre positif");
-		}while(nb_ville>26);
-		System.out.println("Nombre de villes : "+nb_ville);
+			bRead.close();
+		}catch(IOException e){
+			System.out.println("Probleme FileReader / BufferedReader dans main");
+		}
 		
-		//Definition d'un tableau de ville de taille "nb_ville"
+		System.out.println("nb de ville : "+nb_ville);
+		//Definir un tableau de ville de taille "nb_ville"
 		Ville[] tab_ville = new Ville[nb_ville];
 		//Definir les noms des villes
-		Utilitaire.nomVille(tab_ville);
+		Utilitaire.nomVille(tab_ville, Args[0]);
 
 		/*
 		 * Deuxieme etape : Affichage du menu pour les routes et pouvoir faire le choix par l'utilisateur
