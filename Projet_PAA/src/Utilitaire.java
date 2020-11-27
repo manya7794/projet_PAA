@@ -299,4 +299,37 @@ public class Utilitaire {
 		} while ((option==1) || (option==2)||(option==3));
 		return option;
 	}
+	
+	/*
+	 * Implementation d'algorithme peu optimiser
+	 */
+	public static ArrayList<Ville> automatique(ArrayList<Ville> tab_ville) {
+		int scoreCourant = 0;
+		for(int i = 0; i<tab_ville.size();i++) {
+			if(tab_ville.get(i).getEcole()) {
+				scoreCourant++;
+			}
+		}
+		for(int i =0; i<tab_ville.size();) {
+			int score = scoreCourant;
+			Ville v = tab_ville.get(i);
+			if(tab_ville.get(i).getEcole()) {
+				v.setEcole(false);
+				score--;
+			}
+			else {
+				v.setEcole(true);
+				score++;
+			}
+			if(score<scoreCourant) {
+				i=0;
+				scoreCourant=score;
+			}
+			else {
+				i++;
+			}
+		}
+		return tab_ville;
+	}
+	
 }
