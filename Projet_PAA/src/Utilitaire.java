@@ -4,11 +4,11 @@ import java.util.Scanner;
 public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en définissant le nombre total de ville 
+	 * Cette methode creer un tableau de nom  ville a toutes les villes en dÃ©finissant le nombre total de ville 
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
 	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
-	 * car les noms de ville peuvent être en lettre alphabétique ou des chaines de caracère
+	 * car les noms de ville peuvent Ãªtre en lettre alphabÃ©tique ou des chaines de caracÃ¨re
 	 */
 	public static void nomVille(ArrayList <Ville>tab_ville, String nomFichier) {		
 		Ville v;
@@ -17,23 +17,22 @@ public class Utilitaire {
 		
 		while(!sortie) {
 			v = VilleParser.parser(nomFichier, nb_ville);
-			tab_ville.add(nb_ville, v);
+			tab_ville.add(nb_ville, v); 
 			nb_ville +=1;
-			System.out.println(v);
 			sortie = VilleParser.getSortie();
 		}
-		System.out.println("Nombre de villes :"+nb_ville);
-	}
+		System.out.println(tab_ville);
 
-	public static void lireRoute(String nomFichier, int nb_ville, ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
+	}
+	
+	public static void lireRoute(String nomFichier, ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
 		boolean sortie =false;
 		String route;
+		int taille = tab_ville.size();
 		while(!sortie) {
-			route = RouteParser.parser(nomFichier, nb_ville);
-			
-			nb_ville+=1;
+			route = RouteParser.parser(nomFichier, taille);
+			taille+=1;
 			createRoute(route.split(","), tab_ville, tab_voisin);
-			//Utilitaire.createRoute(route.split(","), tab_ville, tab_voisin);
 			sortie=RouteParser.getSortie();
 		}
 	}
@@ -44,9 +43,12 @@ public class Utilitaire {
 	 * @param tab_ville - Ville[] contenant la liste des villes creees au debut
 	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste de tous les voisins de chaque ville
 	 */
-	private static void createRoute(String[] route, ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
-		String ville_1=route[0];
-		String ville_2=route[1];				
+	public static void createRoute(String []route, ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
+		
+					
+		String ville_1 = route[0];
+		String ville_2 = route[1];
+		
 		
 		boolean bool_1 = false;
 		boolean bool_2 = false;
@@ -103,7 +105,7 @@ public class Utilitaire {
 		
 			//Affichage du tab_voisin 
 			afficherVoisin(tab_ville, tab_voisin);
-		}
+		}	
 	}
 	
 	/* Affichage de la liste des voisins de chaque ville
@@ -133,7 +135,7 @@ public class Utilitaire {
 	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
 	 * l'option 3 met fin a cette application
 	 * 
-	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville où nous pouvons connaitre le nom de la ville et
+	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
 	 * savoir si une ecole est construite dedans
 	 */
 	public static void menuEcole(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
@@ -161,7 +163,7 @@ public class Utilitaire {
 					if(tab_ville.get(i).getNom()==ville) {
 						existe=true;
 						boolean ajout =true;
-						tab_ville.get(i).gestionEcole(ajout);
+						tab_ville.get(i).gestionEcole(existe, ajout);
 					}
 				}
 				System.out.print("Liste des villes avec une ecole : ");
@@ -180,12 +182,12 @@ public class Utilitaire {
 				 */
 				for(int i = 0; i<tab_ville.size() && (!existe); i++) {
 					if(tab_ville.get(i).getNom()==ville) {
-						//Ville trouvée
+						//Ville trouvÃ©e
 						existe=tab_ville.get(i).rechercheEcole(tab_ville, tab_voisin, ville);
 						
 						if (existe) {
 							boolean ajout = false;
-							tab_ville.get(i).gestionEcole(ajout);	
+							tab_ville.get(i).gestionEcole(existe, ajout);	
 						}
 						else
 							System.out.println("Impossible de supprimer l'ecole, il n'y aucune ecole dans les villes voisines.");

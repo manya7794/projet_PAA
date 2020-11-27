@@ -16,15 +16,15 @@ public class RouteParser {
 				while ((ligne=br.readLine())!=null) {
 					if(ligne.startsWith("route")){
 						if(villesaCouper!=null) {
-						
+					
 						}
 						else {
 							villesaCouper =ligne.substring(6, ligne.length()-2);
-							if(!ligne.startsWith("ville")) {
+							ligne = br.readLine();
+							if(!ligne.startsWith("route")) {
 								setSortie();
 							}
 						}
-						
 					}
 				}
 		} catch (FileNotFoundException e) {
@@ -35,6 +35,7 @@ public class RouteParser {
 		if(villesaCouper==null) {
 			//System.err.println("Aucune route n'a ete indique");
 			setSortie();
+			System.exit(0);
 		}
 		return villesaCouper;
 	}

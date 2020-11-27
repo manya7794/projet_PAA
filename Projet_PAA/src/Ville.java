@@ -27,6 +27,7 @@ public class Ville {
 	}
 	
 	//Getters
+	
 	public String getNom () {
 		return nom;
 	}
@@ -36,6 +37,7 @@ public class Ville {
 	}
 	
 	//Methodes
+	
 	public void ajoutEcole() {
 		setEcole(true);
 	}
@@ -46,11 +48,17 @@ public class Ville {
 	
 	/*
 	 * Cette methode permet d'effectuer toutes les taches inherantes aux ecoles d'une ville
-	 * (ajout, retrait) tout en verifiant l'existence de la ville
+	 * (ajout, retrait) tout en vérifiant l'existence de la ville
+	 * @param ville - boolean signifiant l'existence ou non de la ville
 	 * @param ajout - boolean signifiant l'ajout ou le retrait d'une ecole
 	 */
-	public void gestionEcole(boolean ajout) {
-		if (ajout && getEcole()) {
+	public void gestionEcole(boolean ville, boolean ajout) {
+
+		if(!ville) {
+			//Verifie si la ville saisie est une ville dans qui existe dans le tableau de ville
+			System.err.println("La ville n'existe pas");
+		}
+		else if (ajout && getEcole()) {
 			//Si une ecole est deja presente alors qu'on veut en ajouter une
 			System.err.println("Cette ville a deja une ecole");
 		}
@@ -73,18 +81,16 @@ public class Ville {
 	}
 	
 	/*
-	 * Methode verifiant l'existence d'une ecole dans les villes voisines a la ville passee en entree
-	 *
 	 * @param tab_ville - Ville{] contenant toutes les villes creees au debut du programme
-	 * @param tab_voisin - ArrayList <ArrayList<Stringacter>> contenant la liste des voisins de chaque ville
-	 * @param ville - String contenant le nom de la ville actuelle dont on recherche les voisins
-	 * @return ecole - True si une ecole est presente dans le voisinage, false sinon
+	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste des voisins de chaque ville
+	 * @param ville - char contenant le nom de la ville actuelle dont on recherche les voisins
+	 * @return ecole - boolean signifiant l'existence ou non d'une ecole dans les villes voisines a la ville passee en entree
 	 */
 	public boolean rechercheEcole (ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin, String ville) {
 		boolean ecole = false;
 		boolean sortie = false;
 		for (int i=0; i<tab_ville.size() && !sortie;i++) {
-			//Acces a la position de la ville
+			//Accès à la position de la ville
 			if (tab_ville.get(i).getNom()==ville) {
 				sortie =true;
 				//Balayage de la liste des voisins
@@ -101,10 +107,8 @@ public class Ville {
 		}
 		return ecole;
 	}
+	
 	public String toString() {
-		if (ecole)
-			return "Nom de la ville : "+nom+" Ecole : presente";
-		else
-			return "Nom de la ville : "+nom+" Ecole : non presente";
+		return nom;
 	}
 }
