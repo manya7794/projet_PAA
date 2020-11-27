@@ -20,7 +20,11 @@ public class RouteParser {
 						}
 						else {
 							villesaCouper =ligne.substring(6, ligne.length()-2);
+							if(!ligne.startsWith("ville")) {
+								setSortie();
+							}
 						}
+						
 					}
 				}
 		} catch (FileNotFoundException e) {
@@ -31,14 +35,13 @@ public class RouteParser {
 		if(villesaCouper==null) {
 			//System.err.println("Aucune route n'a ete indique");
 			setSortie();
-			System.exit(0);
 		}
 		return villesaCouper;
 	}
 	private static void setSortie() {
 		sortie =true;
 	}
-	public boolean getSortie() {
+	public static boolean getSortie() {
 		return sortie;
 	}
 }

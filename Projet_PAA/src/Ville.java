@@ -80,20 +80,20 @@ public class Ville {
 	 * @param ville - String contenant le nom de la ville actuelle dont on recherche les voisins
 	 * @return ecole - True si une ecole est presente dans le voisinage, false sinon
 	 */
-	public boolean rechercheEcole (Ville[] tab_ville, ArrayList <ArrayList<String>> tab_voisin, String ville) {
+	public boolean rechercheEcole (ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin, String ville) {
 		boolean ecole = false;
 		boolean sortie = false;
-		for (int i=0; i<tab_ville.length && !sortie;i++) {
-			//Accès à la position de la ville
-			if (tab_ville[i].getNom()==ville) {
+		for (int i=0; i<tab_ville.size() && !sortie;i++) {
+			//Acces a la position de la ville
+			if (tab_ville.get(i).getNom()==ville) {
 				sortie =true;
 				//Balayage de la liste des voisins
 				for(int j=0;j<tab_voisin.get(i).size();j++) {
 					String villeTmp=tab_voisin.get(i).get(j); //Variable tampon contenant le nom du voisin actuel
 					//Balayage du tableau de villes
-					for(int k=0; k<tab_ville.length;k++) {
-						if(tab_ville[k].getNom()==(villeTmp)) {
-							ecole=tab_ville[k].getEcole();//Place la valeur du boolean Ecole
+					for(int k=0; k<tab_ville.size();k++) {
+						if(tab_ville.get(k).getNom()==(villeTmp)) {
+							ecole=tab_ville.get(k).getEcole();//Place la valeur du boolean Ecole
 						}
 					}
 				}
