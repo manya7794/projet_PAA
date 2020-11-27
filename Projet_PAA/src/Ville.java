@@ -2,23 +2,23 @@ import java.util.ArrayList;
 
 public class Ville {
 	//Attributs
-	private char nom;
+	private String nom;
 	private boolean ecole;
 	
 	//Constructeurs
-	public Ville(char nom) {
+	public Ville(String nom) {
 		this.nom=nom;
 		ecole=true;
 	}
 	
-	public Ville(char nom, boolean ecole) {
+	public Ville(String nom, boolean ecole) {
 		this.nom=nom;
 		this.ecole=ecole;
 	}
 
 	
 	//Setters
-	public void setNom(char nom) {
+	public void setNom(String nom) {
 		this.nom=nom;
 	}
 	
@@ -27,7 +27,7 @@ public class Ville {
 	}
 	
 	//Getters
-	public char getNom () {
+	public String getNom () {
 		return nom;
 	}
 	
@@ -76,11 +76,11 @@ public class Ville {
 	 * Methode verifiant l'existence d'une ecole dans les villes voisines a la ville passee en entree
 	 *
 	 * @param tab_ville - Ville{] contenant toutes les villes creees au debut du programme
-	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste des voisins de chaque ville
-	 * @param ville - char contenant le nom de la ville actuelle dont on recherche les voisins
+	 * @param tab_voisin - ArrayList <ArrayList<Stringacter>> contenant la liste des voisins de chaque ville
+	 * @param ville - String contenant le nom de la ville actuelle dont on recherche les voisins
 	 * @return ecole - True si une ecole est presente dans le voisinage, false sinon
 	 */
-	public boolean rechercheEcole (Ville[] tab_ville, ArrayList <ArrayList<Character>> tab_voisin, char ville) {
+	public boolean rechercheEcole (Ville[] tab_ville, ArrayList <ArrayList<String>> tab_voisin, String ville) {
 		boolean ecole = false;
 		boolean sortie = false;
 		for (int i=0; i<tab_ville.length && !sortie;i++) {
@@ -89,7 +89,7 @@ public class Ville {
 				sortie =true;
 				//Balayage de la liste des voisins
 				for(int j=0;j<tab_voisin.get(i).size();j++) {
-					char villeTmp=tab_voisin.get(i).get(j); //Variable tampon contenant le nom du voisin actuel
+					String villeTmp=tab_voisin.get(i).get(j); //Variable tampon contenant le nom du voisin actuel
 					//Balayage du tableau de villes
 					for(int k=0; k<tab_ville.length;k++) {
 						if(tab_ville[k].getNom()==(villeTmp)) {
@@ -100,5 +100,11 @@ public class Ville {
 			}
 		}
 		return ecole;
+	}
+	public String toString() {
+		if (ecole)
+			return "Nom de la ville : "+nom+" Ecole : presente";
+		else
+			return "Nom de la ville : "+nom+" Ecole : non presente";
 	}
 }
