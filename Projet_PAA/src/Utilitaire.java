@@ -3,8 +3,9 @@ import java.util.Scanner;
 
 public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
+	
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en définissant le nombre total de ville 
+	 * Cette methode creer un tableau de nom  ville a toutes les villes en definissant le nombre total de ville 
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
 	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
@@ -16,15 +17,15 @@ public class Utilitaire {
 		int nb_ville = 0;
 		
 		while(!sortie) {
-			v = VilleParser.parser(nomFichier, nb_ville);
+			v = Parser.VilleParser.parser(nomFichier, nb_ville);
 			tab_ville.add(nb_ville, v); 
 			nb_ville +=1;
-			sortie = VilleParser.getSortie();
+			sortie = Parser.VilleParser.getSortie();
 		}
-		System.out.print("Liste des villes : ");
-		for(int i=0; i<tab_ville.size(); i++) {
-			System.out.print(tab_ville.get(i).toStringNom()+" ");
-		}
+		//Affichage de la liste des villes
+		System.out.println("Liste des villes : ");
+		for(int i=0; i<tab_ville.size(); i++) 
+			System.out.println(tab_ville.get(i).toStringNom());
 		System.out.println();
 	}
 	
@@ -43,10 +44,10 @@ public class Utilitaire {
 		String route;
 		int taille = tab_ville.size();
 		while(!sortie) {
-			route = RouteParser.parser(nomFichier, taille);
+			route = Parser.RouteParser.parser(nomFichier, taille);
 			taille+=1;
 			
-			sortie=RouteParser.getSortie();
+			sortie=Parser.RouteParser.getSortie();
 			if(!sortie)
 			createRoute(route.split(","), tab_ville, tab_voisin);
 		}
@@ -59,32 +60,29 @@ public class Utilitaire {
 	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste de tous les voisins de chaque ville
 	 */
 	public static void createRoute(String []route, ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
-		
 					
 		String ville_1 = route[0];
 		String ville_2 = route[1];
-		
 		
 		boolean bool_1 = false;
 		boolean bool_2 = false;
 		
 		//Regarde si ville_1 est dans tab_ville
 		for(int i = 0 ; (i < tab_ville.size()) && !bool_1 ; i++) {
-			if(tab_ville.get(i).getNom().equals(ville_1)) {
+			if(tab_ville.get(i).getNom().equals(ville_1)) 
 				bool_1 = true;
-			}
 		}
 		
 		//Regarde si ville_2 est dans tab_ville
 		for(int i = 0 ; (i < tab_ville.size()) && !bool_2 ; i++) {
-			if(tab_ville.get(i).getNom().equals(ville_2)) {
+			if(tab_ville.get(i).getNom().equals(ville_2))
 				bool_2 = true;
-			}
 		}
 		
 		if(!bool_1 || !bool_2) {
 			System.err.println("L'une des deux villes est inexistante");
 		}
+		
 		//Verifie que les deux villes sont differentes
 		else if(ville_1.equals(ville_2)) {
 			System.out.println("La ville " + ville_1 + " ne peut etre reliee a elle-meme");
@@ -117,9 +115,6 @@ public class Utilitaire {
 					}
 				}
 			}
-		
-			//Affichage du tab_voisin 
-			
 		}	
 	}
 	
@@ -143,8 +138,64 @@ public class Utilitaire {
 		System.out.println();
 	}
 	
+	public static void lireEcole(ArrayList<Ville> tab_ville, String nomFichier) {
+		
+			Parser.EcoleParser.parser(nomFichier, tab_ville);
+			
+			for(int i=0;i<tab_ville.size();i++){
+				System.out.println(tab_ville.get(i).toString());
+			}
+			//System.out.println("Fin de la lecture des ecoles");
+		
+	}
+	
 	/*
-	 * Cette methode doit afficher le menu sur les ecoles, nous devons saisir entre 1, 2 et 3 qui sont trois option differente:
+	 * Menu principal
+	 */
+	public static void menuPrincipal(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
+		boolean sortie = true;
+		do {
+			int option = choixMenuPrincipal();
+			switch(option) {
+			case 1 : 
+				System.out.println("Resoudre manuellement");
+				menuEcole(tab_ville, tab_voisin);
+				break;
+			case 2 :
+				System.out.println("Resoudre automatiquement");
+				automatique(tab_ville);
+				break;
+			case 3 : 
+				System.out.println("Sauvegarder");
+				break;
+			case 4 :
+				sortie = false;
+				break;
+			default :
+				System.out.println("Option invalide, choissisez une autre option");
+				break;
+			}
+		}while(sortie);
+	}
+	
+	private static int choixMenuPrincipal() {
+		int option;
+		do {
+			System.out.println("*************Menu principal*************");
+			System.out.println("1)Resoudre manuellement");
+			System.out.println("2)Resoudre automatiquement");
+			System.out.println("3)Sauvegarder");
+			System.out.println("4)Quitter");
+			System.out.println("*****************************************");
+			option = scan.nextInt();
+		}while(option>=4 && option<=1);
+		return option;
+	}
+	
+
+	//Resolution manuelle
+	/*
+	 * Cette methode doit afficher le menu sur les ecoles, nous devons saisir entre 1, 2 et 3 qui sont trois options differente:
 	 * l'option 1 permet de ajouter une ecole a une ville, elle devra changer la variable boolean ecole en true pour savoir 
 	 * qu'il y a une ecole dans cette ville et nous ne pouvons pas continuer a recreer un ecole par dessu
 	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
@@ -225,49 +276,7 @@ public class Utilitaire {
 	}
 
 	
-	/*
-	 * Menu principal
-	 */
-	public static void menuPrincipal(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
-		boolean sortie = true;
-		do {
-			int option = choixMenuPrincipal();
-			switch(option) {
-			case 1 : 
-				System.out.println("Resoudre manuellement");
-				menuEcole(tab_ville, tab_voisin);
-				break;
-			case 2 :
-				System.out.println("Resoudre automatiquement");
-				automatique(tab_ville);
-				break;
-			case 3 : 
-				System.out.println("Sauvegarder");
-				break;
-			case 4 :
-				sortie = false;
-				break;
-			default :
-				System.out.println("Option invalide, choissisez une autre option");
-				break;
-			}
-		}while(sortie);
-	}
-	
-	private static int choixMenuPrincipal() {
-		int option;
-		do {
-			System.out.println("*************Menu principal*************");
-			System.out.println("1)Resoudre manuellement");
-			System.out.println("2)Resoudre automatiquement");
-			System.out.println("3)Sauvegarder");
-			System.out.println("4)Quitter");
-			System.out.println("*****************************************");
-			option = scan.nextInt();
-		}while(option>=4 && option<=1);
-		return option;
-	}
-	
+	//Resolution algorithmique
 	/*
 	 * Implementation d'algorithme peu optimise
 	 */
