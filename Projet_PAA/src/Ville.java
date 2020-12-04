@@ -88,14 +88,14 @@ public class Ville {
 		boolean sortie = false;
 		for (int i=0; i<tab_ville.size() && !sortie;i++) {
 			//Accès à la position de la ville
-			if (tab_ville.get(i).getNom()==ville) {
+			if (tab_ville.get(i).getNom().equals(ville)) {
 				sortie =true;
 				//Balayage de la liste des voisins
 				for(int j=0;j<tab_voisin.get(i).size();j++) {
 					String villeTmp=tab_voisin.get(i).get(j); //Variable tampon contenant le nom du voisin actuel
 					//Balayage du tableau de villes
 					for(int k=0; k<tab_ville.size();k++) {
-						if(tab_ville.get(k).getNom()==(villeTmp)) {
+						if(tab_ville.get(k).getNom().equals(villeTmp)) {
 							ecole=tab_ville.get(k).getEcole();//Place la valeur du boolean Ecole
 						}
 					}
@@ -114,5 +114,13 @@ public class Ville {
 	
 	public String toStringNom() {
 		return nom;
+	}
+	
+	public String toStringSauvegardeVille() {
+		return "ville("+toStringNom()+").";
+	}
+	
+	public String toStringSauvegardeEcole() {
+		return "ecole("+toStringNom()+").";
 	}
 }

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -128,7 +129,7 @@ public class Utilitaire {
 		for(int i = 0 ; i < tab_voisin.size() ; i ++) {
 			System.out.print("Voisins de la ville " +tab_ville.get(i).getNom()+" : ");
 			
-			//ArrayList <Character>
+			
 			for(int j = 0 ; j < tab_voisin.get(i).size(); j++) {
 				System.out.print(tab_voisin.get(i).get(j) + " ");
 			}
@@ -166,10 +167,14 @@ public class Utilitaire {
 				automatique(tab_ville);
 				break;
 			case 3 : 
-				System.out.println("Sauvegarder");
+				System.out.println("Ou voulez-vous sauvegarder les resultats ?");
+				String nomFichier =scan.next();
+				sauvergadeFichier(nomFichier, tab_ville, tab_voisin);
+				System.out.println("Fichier sauvegarde a l'adresse "+nomFichier);
 				break;
 			case 4 :
 				sortie = false;
+				scan.close();
 				break;
 			default :
 				System.out.println("Option invalide, choissisez une autre option");
@@ -192,6 +197,19 @@ public class Utilitaire {
 		return option;
 	}
 	
+	/*
+	 * Methode effectuant la sauvegarde de la derniere solution dans un fichier
+	 */
+	public static void sauvergadeFichier(String fichier, ArrayList<Ville> tab_ville,  ArrayList <ArrayList<String>> tab_voisin) {
+		try {
+			Sauvegarde.SauvegardeVille.sauvegardeVersFichier(fichier, tab_ville);
+			Sauvegarde.SauvegardeRoute.sauvegardeVersFichier(fichier, tab_voisin, tab_ville);
+			Sauvegarde.SauvegardeEcole.sauvegardeVersFichier(fichier, tab_ville);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	//Resolution manuelle
 	/*
@@ -226,7 +244,7 @@ public class Utilitaire {
 				 * s'il le trouve il retourne vrai sinon false
 				 */
 				for(int i = 0; i<tab_ville.size() && (!existe); i++) {
-					if(tab_ville.get(i).getNom()==ville) {
+					if(tab_ville.get(i).getNom().equals(ville)) {
 						existe=true;
 						boolean ajout =true;
 						tab_ville.get(i).gestionEcole(existe, ajout);
@@ -247,7 +265,7 @@ public class Utilitaire {
 				 * s'il le trouve il retourne vrai sinon false
 				 */
 				for(int i = 0; i<tab_ville.size() && (!existe); i++) {
-					if(tab_ville.get(i).getNom()==ville) {
+					if(tab_ville.get(i).getNom().equals(ville)) {
 						//Ville trouvée
 						existe=tab_ville.get(i).rechercheEcole(tab_ville, tab_voisin, ville);
 						
@@ -272,7 +290,6 @@ public class Utilitaire {
 				break;
 			}
 		}while(sortie);
-		scan.close();
 	}
 
 	
