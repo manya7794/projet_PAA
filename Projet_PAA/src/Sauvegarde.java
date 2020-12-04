@@ -18,7 +18,8 @@ public class Sauvegarde {
 		 * @param tab_ville tableau contenant les villes
 		 */
 		public static void sauvegardeVersFichier(String fichier, ArrayList<Ville> tab_ville) throws FileNotFoundException, IOException{
-			File fichier1 = new File(fichier);
+			String fichier1="C:\\Users\\despi\\Documents\\Test.txt";
+			//File fichier1 = new File(fichier);
 			//Ouverture de l'acces en ecriture
 			try(BufferedWriter bw=new BufferedWriter(new FileWriter(fichier1))){
 				//Creation de la ligne de lecture
@@ -43,10 +44,11 @@ public class Sauvegarde {
 		 */
 		public static void sauvegardeVersFichier(String fichier,  ArrayList <ArrayList<String>> tab_voisin, ArrayList<Ville> tab_ville) throws FileNotFoundException, IOException {
 			//Ouverture de l'acces en ecriture
-			try(BufferedWriter bw=new BufferedWriter(new FileWriter(fichier, true))){
+			File fichier1 = new File(fichier);
+			try(BufferedWriter bw=new BufferedWriter(new FileWriter(fichier1, true))){
 				//Ouverture de l'acces en lecture
 				PrintWriter pW = new PrintWriter(bw);
-				try(BufferedReader br=new BufferedReader(new FileReader(fichier))){
+				try(BufferedReader br=new BufferedReader(new FileReader(fichier1))){
 					//Creation de la ligne de lecture
 					String ligneFichier=null;
 					//Creation du tableau permettant d'eviter les doublons lors de la creation des routes
@@ -100,10 +102,11 @@ public class Sauvegarde {
 		 * @param tab_ville tableau contenant les villes 
 		 */
 		public static void sauvegardeVersFichier(String fichier, ArrayList<Ville> tab_ville)throws FileNotFoundException, IOException {
+			File fichier1 = new File(fichier);
 			//Ouverture de l'acces en ecriture
-			try(BufferedWriter bw=new BufferedWriter(new FileWriter(fichier, true))){
+			try(BufferedWriter bw=new BufferedWriter(new FileWriter(fichier1, true))){
 				//Ouverture de l'acces en lecture
-				try(BufferedReader br=new BufferedReader(new FileReader(fichier))){
+				try(BufferedReader br=new BufferedReader(new FileReader(fichier1))){
 					//Creation de la ligne de lecture
 					String ligneFichier=null;
 					PrintWriter pW = new PrintWriter(bw);
