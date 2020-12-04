@@ -18,8 +18,8 @@ public class Sauvegarde {
 		 * @param tab_ville tableau contenant les villes
 		 */
 		public static void sauvegardeVersFichier(String fichier, ArrayList<Ville> tab_ville) throws FileNotFoundException, IOException{
-			String fichier1="C:\\Users\\despi\\Documents\\Test.txt";
-			//File fichier1 = new File(fichier);
+			
+			File fichier1 = new File(fichier);
 			//Ouverture de l'acces en ecriture
 			try(BufferedWriter bw=new BufferedWriter(new FileWriter(fichier1))){
 				//Creation de la ligne de lecture
