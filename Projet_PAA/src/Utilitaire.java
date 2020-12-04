@@ -6,11 +6,11 @@ public class Utilitaire {
 	static Scanner scan = new Scanner(System.in);
 	
 	/*
-	 * Cette methode creer un tableau de nom  ville a toutes les villes en definissant le nombre total de ville 
+	 * Cette methode cree un tableau de nom  ville a toutes les villes en definissant le nombre total de ville 
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
 	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
-	 * car les noms de ville peuvent Ãªtre en lettre alphabetique ou des chaines de caractere
+	 * car les noms de ville peuvent être en lettre alphabetique ou des chaines de caractere
 	 */
 	public static void nomVille(ArrayList <Ville>tab_ville, String nomFichier) {		
 		Ville v;
@@ -160,11 +160,11 @@ public class Utilitaire {
 			switch(option) {
 			case 1 : 
 				System.out.println("Resoudre manuellement");
-				menuEcole(tab_ville, tab_voisin);
+				Resolution.ResolutionManuelle.menuEcole(tab_ville, tab_voisin);
 				break;
 			case 2 :
 				System.out.println("Resoudre automatiquement");
-				automatique(tab_ville);
+				Resolution.ResolutionAutomatique.automatiqueApproximation(tab_ville);
 				break;
 			case 3 : 
 				System.out.println("Ou voulez-vous sauvegarder les resultats ?");
@@ -209,77 +209,5 @@ public class Utilitaire {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	//Resolution manuelle
-	/*
-	 * Cette methode doit afficher le menu sur les ecoles, nous devons saisir entre 1, 2 et 3 qui sont trois options differente:
-	 * l'option 1 permet de ajouter une ecole a une ville, elle devra changer la variable boolean ecole en true pour savoir 
-	 * qu'il y a une ecole dans cette ville et nous ne pouvons pas continuer a recreer un ecole par dessu
-	 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
-	 * l'option 3 met fin a cette application
-	 * 
-	 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
-	 * savoir si une ecole est construite dedans
-	 */
-	public static void menuEcole(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
-		boolean sortie = true;
-
-		do {
-			System.out.println("");
-			System.out.println("Menu d'ecole :");
-			System.out.println("1) Ajouter une ecole");
-			System.out.println("2) Retirer une ecole");
-			System.out.println("3) Fin");
-
-			int option = scan.next().charAt(0);
-			switch(option) {
-			case '1' :
-				Resolution.ResolutionManuelle.ajoutManuelle(scan, tab_ville);
-				break;
-			case '2' : 
-				Resolution.ResolutionManuelle.suppressionManuelle(scan, tab_ville, tab_voisin);
-				break;
-			case '3' : 
-				sortie = false;
-				break;
-			default : System.out.println("Commande invalide, choissisez une option");
-				break;
-			}
-		}while(sortie);
-	}
-
-	
-	//Resolution algorithmique
-	/*
-	 * Implementation d'algorithme peu optimise
-	 */
-	public static ArrayList<Ville> automatique(ArrayList<Ville> tab_ville) {
-		int scoreCourant = 0;
-		for(int i = 0; i<tab_ville.size();i++) {
-			if(tab_ville.get(i).getEcole()) {
-				scoreCourant++;
-			}
-		}
-		for(int i =0; i<tab_ville.size();) {
-			int score = scoreCourant;
-			Ville v = tab_ville.get(i);
-			if(tab_ville.get(i).getEcole()) {
-				v.setEcole(false);
-				score--;
-			}
-			else {
-				v.setEcole(true);
-				score++;
-			}
-			if(score<scoreCourant) {
-				i=0;
-				scoreCourant=score;
-			}
-			else {
-				i++;
-			}
-		}
-		return tab_ville;
 	}
 }
