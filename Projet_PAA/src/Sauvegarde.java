@@ -9,7 +9,32 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class Sauvegarde {
+	//Attributs
+	private static boolean sauvegardeAuto= false;
+	private static String fichierSauvegardeAuto;
+
+	//Methodes
 	
+	public static boolean getSauvegardeAuto() {
+		return sauvegardeAuto;
+	}
+	
+	public static void setSauvegardeAuto() {
+		if(sauvegardeAuto)
+			sauvegardeAuto=false;
+		else
+			sauvegardeAuto=true;
+	}
+	
+	public static String getfichierSauvegardeAuto() {
+		return fichierSauvegardeAuto;
+	}
+	
+	public static void setfichierSauvegardeAuto(String nomFichier) {
+		fichierSauvegardeAuto=nomFichier;
+	}
+	
+	//Sous-classes
 	public static class SauvegardeVille  {
 		/*
 		 * Sauvegarde de l'ensemble des villes dans un fichier

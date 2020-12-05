@@ -152,37 +152,86 @@ public class Utilitaire {
 	
 	/*
 	 * Menu principal
+	 * 
+	 * @param tab_ville la liste des villes
+	 * @param tab_voisin la liste des voisins de chaque ville
 	 */
 	public static void menuPrincipal(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
-		boolean sortie = true;
+		//Variable permettant la sortie du programme
+		boolean sortie = false;
 		do {
+			//Recuperation des choix
 			int option = choixMenuPrincipal();
+			
 			switch(option) {
+			//Resolution manuelle
 			case 1 : 
-				System.out.println("Resoudre manuellement");
+				System.out.println("\nResolution manuelle");
 				Resolution.ResolutionManuelle.menuEcole(tab_ville, tab_voisin);
-				break;
+			break;
+			//Resolution automatique
 			case 2 :
-				System.out.println("Resoudre automatiquement");
+				System.out.println("\nResolution automatique");
 				Resolution.ResolutionAutomatique.automatiqueApproximation(tab_ville);
-				break;
+			break;
+			//Sauvegarde	
 			case 3 : 
-				System.out.println("Ou voulez-vous sauvegarder les resultats ?");
-				String nomFichier =scan.next();
-				sauvergadeFichier(nomFichier, tab_ville, tab_voisin);
-				System.out.println("Fichier sauvegarde a l'adresse "+nomFichier);
+				System.out.println("\nSauvegarde");
+				String nomFichier;
+				int sauvegarde=choixSauvegarde();
+				
+				switch (sauvegarde) {
+					//Sauvegarde automatique
+					case 1:
+						System.out.println("\nSauvegarde automatique");
+						//Sauvegarde automatique activee
+						if(Sauvegarde.getSauvegardeAuto()) {
+							Sauvegarde.setSauvegardeAuto();
+							System.out.println("Les resultats ne seront plus sauvegardes automatiquement a l'adresse "+Sauvegarde.getfichierSauvegardeAuto());
+						}
+						//Sauvegarde automatique non activee
+						else {
+							System.out.println("Ou voulez-vous sauvegarder les resultats ?");
+							nomFichier =scan.next();
+							Sauvegarde.setfichierSauvegardeAuto(nomFichier);
+							Sauvegarde.setSauvegardeAuto();
+							System.out.println("Les resultats seront sauvegardes automatiquement a l'adresse "+nomFichier);
+						}
+					break;
+					//Sauvegarde manuelle
+					case 2:
+						System.out.println("\nSauvegarde manuelle");
+						System.out.println("\nOu voulez-vous sauvegarder les resultats ?");
+						nomFichier =scan.next();
+						sauvergadeManuelleFichier(nomFichier, tab_ville, tab_voisin);
+						System.out.println("Les resultars sont sauvegardes a l'adresse "+nomFichier);
+					break;
+				
+					default:
+						System.out.println("Les resultats n'ont pas ete sauvegarde");
+					break;
+				}
 				break;
+				
+			//Fin du programme	
 			case 4 :
-				sortie = false;
+				System.out.println("Fin du programme");
+				sortie = true;
 				scan.close();
 				break;
 			default :
 				System.out.println("Option invalide, choissisez une autre option");
 				break;
 			}
-		}while(sortie);
+		}while(!sortie);
 	}
 	
+	/*
+	 * Methode affichant les options disponibles pour le menu principal
+	 * et recuperant un entier correspondant au choix
+	 * 
+	 * @return option le choix effectue par l'utilisateur
+	 */
 	private static int choixMenuPrincipal() {
 		int option;
 		do {
@@ -198,15 +247,34 @@ public class Utilitaire {
 	}
 	
 	/*
-	 * Methode effectuant la sauvegarde de la derniere solution dans un fichier
+	 * Methode affichant les options disponibles pour la sauvegarde
+	 * et recuperant un entier correspondant au choix
+	 * 
+	 * @return option le choix effectue par l'utilisateur
 	 */
-	public static void sauvergadeFichier(String fichier, ArrayList<Ville> tab_ville,  ArrayList <ArrayList<String>> tab_voisin) {
+	private static int choixSauvegarde() {
+		int option;
+		do {
+			System.out.println("1)Sauvegarder automatiquement");
+			System.out.println("2)Sauvegarder manuellement");
+			option = scan.nextInt();
+		}while(option>=2&&option<=1);
+		return option;
+	}
+	
+	/*
+	 * Methode effectuant la sauvegarde de la derniere solution dans un fichier
+	 * 
+	 * @param fichier l'adresse du fichier dans lequel sauvegarder les resultats
+	 * @param tab_ville la liste des villes
+	 * @param tab_voisin la liste des voisins pour chaque ville
+	 */
+	public static void sauvergadeManuelleFichier(String fichier, ArrayList<Ville> tab_ville,  ArrayList <ArrayList<String>> tab_voisin) {
 		try {
 			Sauvegarde.SauvegardeVille.sauvegardeVersFichier(fichier, tab_ville);
 			Sauvegarde.SauvegardeRoute.sauvegardeVersFichier(fichier, tab_voisin, tab_ville);
 			Sauvegarde.SauvegardeEcole.sauvegardeVersFichier(fichier, tab_ville);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

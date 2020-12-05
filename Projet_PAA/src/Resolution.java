@@ -24,22 +24,30 @@ public class Resolution {
 			boolean sortie = true;
 
 			do {
-				System.out.println("");
-				System.out.println("Menu d'ecole :");
-				System.out.println("1) Ajouter une ecole");
-				System.out.println("2) Retirer une ecole");
-				System.out.println("3) Fin");
+				System.out.println("\nMenu d'ecole :");
+				System.out.println("1)Ajouter une ecole");
+				System.out.println("2)Retirer une ecole");
+				System.out.println("3)Fin");
 
 				int option = scan.next().charAt(0);
 				switch(option) {
 				case '1' :
 					ajoutManuel(tab_ville);
+					//Verification pour voir si la sauvegarde auto est activee
+					if(Sauvegarde.getSauvegardeAuto())
+						Utilitaire.sauvergadeManuelleFichier(Sauvegarde.getfichierSauvegardeAuto(), tab_ville, tab_voisin);
 					break;
 				case '2' : 
 					suppressionManuelle(tab_ville, tab_voisin);
+					//Verification pour voir si la sauvegarde auto est activee
+					if(Sauvegarde.getSauvegardeAuto())
+						Utilitaire.sauvergadeManuelleFichier(Sauvegarde.getfichierSauvegardeAuto(), tab_ville, tab_voisin);
 					break;
 				case '3' : 
 					sortie = false;
+					//Verification pour voir si la sauvegarde auto est activee
+					if(Sauvegarde.getSauvegardeAuto())
+						Utilitaire.sauvergadeManuelleFichier(Sauvegarde.getfichierSauvegardeAuto(), tab_ville, tab_voisin);
 					break;
 				default : System.out.println("Commande invalide, choissisez une option");
 					break;
@@ -48,8 +56,9 @@ public class Resolution {
 		}
 		
 		/*
-		 *@param
+		 * Methode ajoutant une ecole dans une ville
 		 * 
+		 *@param tab_ville la liste des villes
 		 */
 		public static void ajoutManuel(ArrayList<Ville> tab_ville) {
 			
@@ -76,11 +85,18 @@ public class Resolution {
 			}
 		}
 		
+		/*
+		 * Methode supprimant une ecole dans une ville
+		 * 
+		 * @param tab_ville la liste des villes
+		 * @param tab_voisin la liste des voisins
+		 */
 		public static void suppressionManuelle(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
 			
 			boolean existe = false;
-			String ville = scan.next();
 			System.out.println("Saisissez la ville ou vous voulez retirer une ecole");
+			String ville = scan.next();
+
 	
 			/*
 			 * Recherche un nom de ville dans le tableau de villes
