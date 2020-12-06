@@ -172,7 +172,7 @@ public class Utilitaire {
 			//Resolution automatique
 			case 2 :
 				System.out.println("\nResolution automatique");
-				Resolution.ResolutionAutomatique.automatiqueApproximation(tab_ville);
+				Resolution.ResolutionAutomatique.automatiqueApproximation(tab_ville, tab_voisin);
 			break;
 			//Sauvegarde	
 			case 3 : 
