@@ -1,3 +1,4 @@
+package projetPartie2_DESPIERRES_WANG_ZHOU;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

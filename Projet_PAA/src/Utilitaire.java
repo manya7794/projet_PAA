@@ -1,3 +1,4 @@
+package projetPartie2_DESPIERRES_WANG_ZHOU;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ public class Utilitaire {
 	 * grace a la fonction precedente "nombreVille()"
 	 * 
 	 * @param String [] tab_ville, il faut stocker les noms des villesdans un tableau de String
-	 * car les noms de ville peuvent Ãªtre en lettre alphabetique ou des chaines de caractere
+	 * car les noms de ville peuvent être en lettre alphabetique ou des chaines de caractere
 	 */
 	public static void nomVille(ArrayList <Ville>tab_ville, String nomFichier) {		
 		Ville v;
@@ -203,7 +204,7 @@ public class Utilitaire {
 						System.out.println("\nSauvegarde manuelle");
 						System.out.println("\nOu voulez-vous sauvegarder les resultats ?");
 						nomFichier =scan.next();
-						sauvergadeManuelleFichier(nomFichier, tab_ville, tab_voisin);
+						sauvegardeFichier(nomFichier, tab_ville, tab_voisin);
 						System.out.println("Les resultars sont sauvegardes a l'adresse "+nomFichier);
 					break;
 				
@@ -269,7 +270,7 @@ public class Utilitaire {
 	 * @param tab_ville la liste des villes
 	 * @param tab_voisin la liste des voisins pour chaque ville
 	 */
-	public static void sauvergadeManuelleFichier(String fichier, ArrayList<Ville> tab_ville,  ArrayList <ArrayList<String>> tab_voisin) {
+	public static void sauvegardeFichier(String fichier, ArrayList<Ville> tab_ville,  ArrayList <ArrayList<String>> tab_voisin) {
 		try {
 			Sauvegarde.SauvegardeVille.sauvegardeVersFichier(fichier, tab_ville);
 			Sauvegarde.SauvegardeRoute.sauvegardeVersFichier(fichier, tab_voisin, tab_ville);

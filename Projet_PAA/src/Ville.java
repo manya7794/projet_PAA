@@ -1,3 +1,4 @@
+package projetPartie2_DESPIERRES_WANG_ZHOU;
 import java.util.ArrayList;
 
 public class Ville {
@@ -47,6 +48,7 @@ public class Ville {
 	/*
 	 * Cette methode permet d'effectuer toutes les taches inherantes aux ecoles d'une ville
 	 * (ajout, retrait) tout en verifiant l'existence de la ville
+	 * 
 	 * @param ajout - boolean signifiant l'ajout ou le retrait d'une ecole
 	 */
 	public void gestionEcole(boolean ville, boolean ajout) {
@@ -78,6 +80,8 @@ public class Ville {
 	}
 	
 	/*
+	 * Methode indiquant si une ecole est presente dans une ville ou chez ses voisins
+	 * 
 	 * @param tab_ville - Ville{] contenant toutes les villes creees au debut du programme
 	 * @param tab_voisin - ArrayList <ArrayList<Character>> contenant la liste des voisins de chaque ville
 	 * @param ville - char contenant le nom de la ville actuelle dont on recherche les voisins
@@ -104,6 +108,7 @@ public class Ville {
 		}
 		return ecole;
 	}
+	
 
 	public String toString() {
 		if (ecole)
