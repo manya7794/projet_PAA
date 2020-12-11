@@ -518,7 +518,7 @@ public class Resolution {
 										if(listFeuille.contains(nomVilleVoisin)) {
 											//Retrait du voisin
                                             						listFeuille.remove(nomVilleVoisin);
-                                        }
+                                        					}
 										//Retrait de la ville courante de la liste des feuilles
 										listFeuille.remove(noeudCourant);
 									}
