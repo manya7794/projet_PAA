@@ -25,7 +25,9 @@ public class Parser {
 			String nom=null;
 			boolean ecole=false;
 			try(BufferedReader br=new BufferedReader(new FileReader(fichier))){
+				//Initialisation de la ligne servant a parcourir le fichier
 				String ligne=null;
+				//Sauts de lignes necessaires pour arriver a la prochaine ville
 				for(int i=0; i<nbLigne; i++) {
 					ligne=br.readLine();
 				}
@@ -33,8 +35,11 @@ public class Parser {
 					if(ligne.startsWith("ville")){
 						if(nom!=null){}
 						else{
+							//Recuperation du nom de la ville
 							nom=ligne.substring(6, (ligne.length()-2));
+							//Saut de ligne pour verifier si la recuperation des villes continue
 							ligne=br.readLine();
+							//Cas ou la recuperation des villes est finie
 							if(!ligne.startsWith("ville")) {
 								setSortie();
 							}
