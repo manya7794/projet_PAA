@@ -17,7 +17,7 @@ public class Resolution {
 		 * l'option 2 doit retirer une ecole, si nous retirons une ecole la variable boolean ecole redeviendra false et nous pourrons recreer une ecole par dessu
 		 * l'option 3 met fin a cette application
 		 * 
-		 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville oÃ¹ nous pouvons connaitre le nom de la ville et
+		 * @param Ville[]tab_ville, est un tableau de classe ville un tableau de ville où nous pouvons connaitre le nom de la ville et
 		 * savoir si une ecole est construite dedans
 		 */
 		public static void menuEcole(ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
@@ -517,8 +517,8 @@ public class Resolution {
 										//Cas ou la ville voisine est aussi une feuille
 										if(listFeuille.contains(nomVilleVoisin)) {
 											//Retrait du voisin
-                                            						listFeuille.remove(nomVilleVoisin);
-                                        					}
+                                            listFeuille.remove(nomVilleVoisin);
+                                        }
 										//Retrait de la ville courante de la liste des feuilles
 										listFeuille.remove(noeudCourant);
 									}

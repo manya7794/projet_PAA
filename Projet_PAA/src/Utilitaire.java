@@ -31,6 +31,13 @@ public class Utilitaire {
 		System.out.println();
 	}
 	
+	/*
+	 * Cree une liste contenant les voisins de chaque ville
+	 * 
+	 * @param tailleListe le nombre de ville
+	 * 
+	 * @return tab_voisin le tableau contenant les villes et leurs voisins
+	 */
 	public static ArrayList<ArrayList<String>> createListeVoisin(int tailleListe){
 		ArrayList<ArrayList<String>> tab_voisin = new ArrayList<ArrayList<String>>();
 		//Ajoute le nombre de "ligne" correspondant au nb de ville
@@ -41,6 +48,13 @@ public class Utilitaire {
 		return tab_voisin;
 	}
 	
+	/*
+	 * Methode lisant les routes depuis un fichier txt
+	 * 
+	 * @param nomFichier le nom du fichier a lire
+	 * @param tab_ville tableau contenant toutes les villes
+	 * @param tab_voisin tableau contenant les villes et leurs voisins
+	 */
 	public static void lireRoute(String nomFichier, ArrayList<Ville> tab_ville, ArrayList <ArrayList<String>> tab_voisin) {
 		boolean sortie =false;
 		String route;
@@ -140,6 +154,12 @@ public class Utilitaire {
 		System.out.println();
 	}
 	
+	/*
+	 * Methode lisant les ecoles depuis un fichier txt
+	 * 
+	 * @param tab_ville tableau contenant toutes les villes
+	 * @param nomFichier le nom du fichier a lire
+	 */
 	public static void lireEcole(ArrayList<Ville> tab_ville, String nomFichier) {
 		
 			Parser.EcoleParser.parser(nomFichier, tab_ville);
@@ -192,7 +212,7 @@ public class Utilitaire {
 						}
 						//Sauvegarde automatique non activee
 						else {
-							System.out.println("Ou voulez-vous sauvegarder les resultats ?");
+							System.out.println("Ou voulez-vous sauvegarder les resultats (extension a rajouter) ?");
 							nomFichier =scan.next();
 							Sauvegarde.setfichierSauvegardeAuto(nomFichier);
 							Sauvegarde.setSauvegardeAuto();
@@ -202,7 +222,7 @@ public class Utilitaire {
 					//Sauvegarde manuelle
 					case 2:
 						System.out.println("\nSauvegarde manuelle");
-						System.out.println("\nOu voulez-vous sauvegarder les resultats ?");
+						System.out.println("\nOu voulez-vous sauvegarder les resultats (extension a rajouter) ?");
 						nomFichier =scan.next();
 						sauvegardeFichier(nomFichier, tab_ville, tab_voisin);
 						System.out.println("Les resultars sont sauvegardes a l'adresse "+nomFichier);
@@ -241,7 +261,7 @@ public class Utilitaire {
 			System.out.println("2)Resoudre automatiquement");
 			System.out.println("3)Sauvegarder");
 			System.out.println("4)Quitter");
-			System.out.println("*****************************************");
+			System.out.println("****************************************");
 			option = scan.nextInt();
 		}while(option>=4 && option<=1);
 		return option;
